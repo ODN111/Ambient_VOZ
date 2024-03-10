@@ -107,9 +107,9 @@ namespace ReportUT_
 
         public  void Check_UID_in_Mes (String S)
         {
-             if (S == null)
+             if (S != null)
             {
-                Mes_LOg = GetTextBetween(S, "UID", " Период измерения");
+                Mes_LOg = GetTextBetween(S, "UID:", " Период измерения");
 
             }
 
@@ -417,7 +417,12 @@ namespace ReportUT_
 
                     sensor_UID_NAME.Time = Convert.ToString(dataReader[0]);
                     sensor_UID_NAME.Mes_LOg = Convert.ToString(dataReader[1]);
-                    List_Sensor_UID_NAME1.Add(sensor_UID_NAME);
+                    if (sensor_UID_NAME.Mes_LOg.Contains("UID:"))
+                    {
+                        sensor_UID_NAME.Check_UID_in_Mes(sensor_UID_NAME.Mes_LOg);
+                        List_Sensor_UID_NAME1.Add(sensor_UID_NAME);
+                    }
+                       
                 }
                 this.CloseConnection();
                 return List_Sensor_UID_NAME1;

@@ -713,9 +713,10 @@ if (k==0)                   return;
                 {
                       if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
                     {
-                       
-                       
-                        Rez_Str.Add(List_Sensor_UID_NAME[i].GetTextBetween(List_Sensor_UID_NAME[i].Mes_LOg, "UID:", "Период"));
+                        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
+
+
+                        //Rez_Str.Add(List_Sensor_UID_NAME[i].GetTextBetween(List_Sensor_UID_NAME[i].Mes_LOg, "UID:", "Период"));
                     }
 ;
 
