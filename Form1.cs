@@ -1,5 +1,8 @@
-﻿using IniParser;
+﻿ 
+
+using IniParser;
 using IniParser.Model;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,13 +17,11 @@ using System.Threading.Tasks;
 
 using System.Windows.Forms;
 using static System.Collections.Specialized.BitVector32;
-//using static System.Net.Mime.MediaTypeNames;
+
+ 
 
 namespace ReportUT_
 {
-
-   
-
 
     delegate void AddProgressEventHandler(int val);
 
@@ -98,6 +99,29 @@ namespace ReportUT_
             t.SetToolTip(Button_Settings, "Настройки");
 
         }
+
+
+        private void Excel_Add( )
+        {
+
+            try
+            {
+                string file = "C:\\Users\\Public\\Documents\\UniTesS\\Report_UID_NANE.xls";
+                var package = new ExcelPackage();
+                var sheet = package.Workbook.Worksheets.Add("Market Report");
+
+                sheet.Cells["B2"].Value = "Company:";
+                sheet.Cells[2, 3].Value = "sasdf";
+
+
+                File.WriteAllBytes("Report.xlsx", package.GetAsByteArray());  //.Save(file);
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
 
         private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
         {
@@ -701,6 +725,9 @@ if (k==0)                   return;
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
+            Excel_Add();
+            return;
+
             try
             {
                 p_odbcConnector = new OdbcConnector(pl.DSN);
@@ -714,22 +741,18 @@ if (k==0)                   return;
                       if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
                     {
                         List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
-
-
-                        //Rez_Str.Add(List_Sensor_UID_NAME[i].GetTextBetween(List_Sensor_UID_NAME[i].Mes_LOg, "UID:", "Период"));
                     }
-;
-
                 }
-
+                // Delete dublicates
                 List<String> myStringList = new List<string>();
-                foreach (string s in Rez_Str)
-                {
-                    if (!myStringList.Contains(s))
-                    {
-                        myStringList.Add(s);
-                    }
-                }
+                //foreach (string s in Rez_Str)
+                //{
+                //    if (!myStringList.Contains(s))
+                //    {
+                //        myStringList.Add(s);
+                //    }
+                //}
+
 
 
 

@@ -9,6 +9,9 @@ using IniParser.Model;
 using System.IO;
 using System.Windows;
 using System.Text.RegularExpressions;
+using ADODB;
+using System.Windows.Documents;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ReportUT_
 {
@@ -104,12 +107,25 @@ namespace ReportUT_
        
         public string Time;
         public string Mes_LOg;
+        public string UID;
+        public string Name;
+
 
         public  void Check_UID_in_Mes (String S)
         {
-             if (S != null)
+          
+            if (S != null)
             {
-                Mes_LOg = GetTextBetween(S, "UID:", " Период измерения");
+               Mes_LOg = GetTextBetween(S, "UID:", " Период измерения");
+                string[] splitArray = new string[1] { "Имя:" };//Add the two strings to an array to split across each string in the array
+                string[] substrings = Mes_LOg.Split(splitArray, StringSplitOptions.None);//Get the substring
+                {
+                    if (substrings[0]  != null)
+                    {
+                        UID = substrings[0].Trim();
+                         Name    =  substrings [1].Trim() ;
+                    }
+                }
 
             }
 
@@ -117,15 +133,12 @@ namespace ReportUT_
 
         public   String GetTextBetween(string text, string findText1, string findText2)
         {
-     
-
-       
+ 
             {
                 string[] splitArray = new string[2] { findText1, findText2 };//Add the two strings to an array to split across each string in the array
                 string[] substring = text.Split(splitArray, StringSplitOptions.None);//Get the substring
                 return substring[1];
-            }
-
+           }
           
         }
 
