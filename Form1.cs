@@ -101,7 +101,7 @@ namespace ReportUT_
         }
 
 
-        private void Excel_Add( )
+        private void Excel_Add(List<Sensor_UID_NAME> List_Sensor_UID_NAME)
         {
 
             try
@@ -110,15 +110,25 @@ namespace ReportUT_
                 var package = new ExcelPackage();
                 var sheet = package.Workbook.Worksheets.Add("Market Report");
 
-                sheet.Cells["B2"].Value = "Company:";
-                sheet.Cells[2, 3].Value = "sasdf";
+                for (int i = 0;i< List_Sensor_UID_NAME.Count;i++)
+                {
+                    sheet.Cells[i+1, 1].Value = List_Sensor_UID_NAME[i].Time;
+                    sheet.Cells[i+1, 2].Value = List_Sensor_UID_NAME[i].UID;
+                    sheet.Cells[i+1, 3].Value = List_Sensor_UID_NAME[i].Name;
+                }
+               
+
+                //sheet.Cells["B2"].Value = "Company:";
+               // sheet.Cells[2, 3].Value = "sasdf";
 
 
                 File.WriteAllBytes("Report.xlsx", package.GetAsByteArray());  //.Save(file);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                Console.WriteLine(e.Message);
+                Logger.GetInstanse().SetData("Excel_Add", ex.Message);
+                MessageBox.Show(ex.Message);
+                return;
             }
         }
 
@@ -725,8 +735,6 @@ if (k==0)                   return;
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
-            Excel_Add();
-            return;
 
             try
             {
@@ -753,6 +761,7 @@ if (k==0)                   return;
                 //    }
                 //}
 
+                Excel_Add(List_Sensor_UID_NAME);
 
 
 

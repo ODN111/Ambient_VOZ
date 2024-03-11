@@ -116,7 +116,7 @@ namespace ReportUT_
           
             if (S != null)
             {
-               Mes_LOg = GetTextBetween(S, "UID:", " Период измерения");
+               Mes_LOg = GetTextBetween(S, "UID:", " Период");
                 string[] splitArray = new string[1] { "Имя:" };//Add the two strings to an array to split across each string in the array
                 string[] substrings = Mes_LOg.Split(splitArray, StringSplitOptions.None);//Get the substring
                 {
