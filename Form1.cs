@@ -66,36 +66,38 @@ namespace ReportUT_
         public Form1()
         {
             InitializeComponent();
-            dateTimePicker1.MaxDate = DateTime.Now;
+            //dateTimePicker1.MaxDate = DateTime.Now;
             DateTime dt = DateTime.Now;
             onProgress += new AddProgressEventHandler(Form1_onProgress);
             onLabelText += new AddProgressEventHandler(Form1_onLabelText);
             onSet_End += new AddProgressEventHandler(Form1_onSet_End);
 
-            dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-            dateTimePicker_2_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+           // dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+          //  dateTimePicker_2_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
             dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-            dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
-            dateTimePicker1.ShowUpDown = true;
+            dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month-1, 1, dt.Hour, dt.Minute, dt.Second);
+           // dateTimePicker1.Format = DateTimePickerFormat.Custom;
+           // dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
+           // dateTimePicker1.ShowUpDown = true;
 
 
-            dateTimePicker_2_Time.MaxDate = DateTime.Now;
-            dateTimePicker_2_Time.Format = DateTimePickerFormat.Custom;
+           // dateTimePicker_2_Time.MaxDate = DateTime.Now;
+          //  dateTimePicker_2_Time.Format = DateTimePickerFormat.Custom;
             // dateTimePicker_2_Time.Value  = DateTime.Now;
-            dateTimePicker_2_Time.ShowUpDown = true;
-            dateTimePicker_2_Time.CustomFormat = " HH:mm";
+          //  dateTimePicker_2_Time.ShowUpDown = true;
+          //  dateTimePicker_2_Time.CustomFormat = " HH:mm";
 
-            dateTimePicker_Start_Time.MaxDate = DateTime.Now;
+            dateTimePicker_Start_Time.MaxDate =   DateTime.Now;
             dateTimePicker_Start_Time.ShowUpDown = true;
             dateTimePicker_Start_Time.CustomFormat = "yyyy MMMM";
+           // dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month-2, 1, dt.Hour, dt.Minute, dt.Second);
 
-            dateTimePicker_Stop_Time.MaxDate = DateTime.Now;
+            dateTimePicker_Stop_Time.MaxDate = DateTime.Now  ;
             dateTimePicker_Stop_Time.ShowUpDown = true;
-            dateTimePicker_Stop_Time.CustomFormat = "MMMM";
+            dateTimePicker_Stop_Time.CustomFormat = "yyyy MMMM";
+         
 
-            ToolTip t = new ToolTip();
+           ToolTip t = new ToolTip();
             t.SetToolTip(Button_Settings, "Настройки");
 
         }
@@ -108,7 +110,7 @@ namespace ReportUT_
             {
                 string file = "C:\\Users\\Public\\Documents\\UniTesS\\Report_UID_NANE.xls";
                 var package = new ExcelPackage();
-                var sheet = package.Workbook.Worksheets.Add("Market Report");
+                var sheet = package.Workbook.Worksheets.Add("Report");
 
                 for (int i = 0;i< List_Sensor_UID_NAME.Count;i++)
                 {
@@ -135,35 +137,35 @@ namespace ReportUT_
 
         private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
         {
-            dateTimePicker_2_Time.Visible = (!dateTimePicker_2_Time.Visible);
-            if (Control.ModifierKeys == Keys.Control) checkBox1.Visible = true;
+            //dateTimePicker_2_Time.Visible = (!dateTimePicker_2_Time.Visible);
+           // if (Control.ModifierKeys == Keys.Control) checkBox1.Visible = true;
         }
 
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            if (RepDAYs.BM2)
-            {
-                dateTimePicker1.Format = DateTimePickerFormat.Custom;
-                dateTimePicker1.CustomFormat = "HH:mm";
-            }
-            else
-            {
-                dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
-            }
+            //if (RepDAYs.BM2)
+            //{
+            //    dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            //    dateTimePicker1.CustomFormat = "HH:mm";
+            //}
+            //else
+            //{
+            //    dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
+            //}
 
 
-            DateTime dt = dateTimePicker1.Value;
-            //  dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+            //DateTime dt = dateTimePicker1.Value;
+            ////  dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
 
-            dateTimePicker1.MaxDate = DateTime.Now;
-            dateTimePicker_2_Time.MaxDate = DateTime.Now;
-            dateTimePicker_2_Time.Value = dateTimePicker1.Value;
+            //dateTimePicker1.MaxDate = DateTime.Now;
+            //dateTimePicker_2_Time.MaxDate = DateTime.Now;
+            //dateTimePicker_2_Time.Value = dateTimePicker1.Value;
 
-            RepDAYs.T11 = dateTimePicker1.Value.ToShortDateString();
-            RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
+            //RepDAYs.T11 = dateTimePicker1.Value.ToShortDateString();
+            //RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
 
-            dateTimePicker1.Value = DateTime.Parse(RepDAYs.T11);
+            //dateTimePicker1.Value = DateTime.Parse(RepDAYs.T11);
         }
 
 
@@ -175,22 +177,22 @@ namespace ReportUT_
 
         private void dateTimePicker_2_Time_ValueChanged(object sender, EventArgs e)
         {
-            DateTime dt = dateTimePicker_2_Time.Value;
-            if (dt < dateTimePicker1.Value)
-            {
-                MessageBox.Show("начало периода  " + dateTimePicker1.Value.ToString() +
-   "\nне может превышать его окончание  " + dateTimePicker_2_Time.Value.ToString(), "Ошибка");
-                dateTimePicker_2_Time.Value = dateTimePicker1.Value;
-                return;
-            }
+   //         DateTime dt = dateTimePicker_2_Time.Value;
+   //         if (dt < dateTimePicker1.Value)
+   //         {
+   //             MessageBox.Show("начало периода  " + dateTimePicker1.Value.ToString() +
+   //"\nне может превышать его окончание  " + dateTimePicker_2_Time.Value.ToString(), "Ошибка");
+   //             dateTimePicker_2_Time.Value = dateTimePicker1.Value;
+   //             return;
+   //         }
 
-            RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
+   //         RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
         }
 
         private void dateTimePicker_Start_Time_ValueChanged(object sender, EventArgs e)
         {
             DateTime dt = dateTimePicker_Start_Time.Value;
-            dateTimePicker1.Value = dt;//
+          //  dateTimePicker1.Value = dt;//
             dateTimePicker_Stop_Time.Value = dt;
             // RepDAYs.M11 = dateTimePicker_Start_Time.Value.ToString();
         }
@@ -217,15 +219,15 @@ namespace ReportUT_
             int Moun = 0;
 
        
-            if (checkBox1.Checked)
-            {
-                Moun = dateTimePicker_Stop_Time.Value.Month - dateTimePicker1.Value.Month;
-                if (dateTimePicker_Start_Time.Value > dateTimePicker_Stop_Time.Value)
-                {
-                    MessageBox.Show("начальная дата  " + dateTimePicker1.Value.ToString() +
-                  "\nне может превышать конечную  " + dateTimePicker_Stop_Time.Value.ToString()); return;
-                }
-            }
+            //if (checkBox1.Checked)
+            //{
+            //    Moun = dateTimePicker_Stop_Time.Value.Month - dateTimePicker1.Value.Month;
+            //    if (dateTimePicker_Start_Time.Value > dateTimePicker_Stop_Time.Value)
+            //    {
+            //        MessageBox.Show("начальная дата  " + dateTimePicker1.Value.ToString() +
+            //      "\nне может превышать конечную  " + dateTimePicker_Stop_Time.Value.ToString()); return;
+            //    }
+            //}
 
 
 
@@ -245,7 +247,7 @@ namespace ReportUT_
 
             Seril_Param();
 
-            Button_Exec_Report.Text = "соедениение с БД  >>>>>>>";
+            //Button_Exec_Report.Text = "соедениение с БД  >>>>>>>";
 
 
             string sTime = "Время";
@@ -262,12 +264,12 @@ namespace ReportUT_
             ListStr2[0] = sHum;
             ListStr3[0] = sRespPerson;
 
-            string Bt = Button_Exec_Report.Text;
+           // string Bt = Button_Exec_Report.Text;
             label_Count.Focus();
 
           
-            RepDAYs.dateT1 = dateTimePicker1.Value;
-            RepDAYs.dateT2 = dateTimePicker_2_Time.Value;
+           // RepDAYs.dateT1 = dateTimePicker1.Value;
+           // RepDAYs.dateT2 = dateTimePicker_2_Time.Value;
             #region [ Task.Run(()]
      
             Task.Run(() =>
@@ -406,41 +408,41 @@ namespace ReportUT_
 
                 dateTm = RepDAYs.dateT1;
                 dateTm2 = RepDAYs.dateT2;
-                if (checkBox2.Checked)
-                    if (dateTm != dateTm2)
-                    {
-                        for (int i = 1; i < 32; i++)
-                        { ListStr[i] = ListStr1[i] = ListStr2[i] = ""; }
+                //if (checkBox2.Checked)
+                //    if (dateTm != dateTm2)
+                //    {
+                //        for (int i = 1; i < 32; i++)
+                //        { ListStr[i] = ListStr1[i] = ListStr2[i] = ""; }
 
-                        countDays = System.DateTime.DaysInMonth(dateTm2.Year, dateTm2.Month);
-                        HH_mm = dateTm2.ToString(" HHч mmмин ");
+                //        countDays = System.DateTime.DaysInMonth(dateTm2.Year, dateTm2.Month);
+                //        HH_mm = dateTm2.ToString(" HHч mmмин ");
 
-                        for (int j = 1; j <= countDays; j++)
-                        {
-                            pSensorMes = p_odbcConnector.OneSensor(Listsensor_Mes, iDS, dateTm2.ToString(), dateTm2.ToString(), 0, pl.DSN);
-                            if (pSensorMes != null)
-                                if (pSensorMes.Id != -1000)
-                                {
-                                    ListStr[j] = pSensorMes.TimeS.ToString("HH:mm"); //();  //
-                                    if (float.IsNaN(pSensorMes.Temperature))
-                                        ListStr1[j] = "N/A";
-                                           else
-                                            ListStr1[j] = pSensorMes.Temperature.ToString("0.0");
+                //        for (int j = 1; j <= countDays; j++)
+                //        {
+                //            pSensorMes = p_odbcConnector.OneSensor(Listsensor_Mes, iDS, dateTm2.ToString(), dateTm2.ToString(), 0, pl.DSN);
+                //            if (pSensorMes != null)
+                //                if (pSensorMes.Id != -1000)
+                //                {
+                //                    ListStr[j] = pSensorMes.TimeS.ToString("HH:mm"); //();  //
+                //                    if (float.IsNaN(pSensorMes.Temperature))
+                //                        ListStr1[j] = "N/A";
+                //                           else
+                //                            ListStr1[j] = pSensorMes.Temperature.ToString("0.0");
 
-                                    if (float.IsNaN(pSensorMes.Humidity))
-                                        ListStr2[j] = "N/A";
-                                    else
-                                        ListStr2[j] = pSensorMes.Humidity.ToString("0.0");
+                //                    if (float.IsNaN(pSensorMes.Humidity))
+                //                        ListStr2[j] = "N/A";
+                //                    else
+                //                        ListStr2[j] = pSensorMes.Humidity.ToString("0.0");
                                   
-                                }
-                                else
-                                {
-                                    ListStr[j] = ListStr1[j] = ListStr2[j] = "";
-                                }
-                            dateTm2 = dateTm2.AddDays(1);
-                        }
-                        Save_Day_mes(ListStr, ListStr1, ListStr2, ListStr3, HH_mm, numS);
-                    }
+                //                }
+                //                else
+                //                {
+                //                    ListStr[j] = ListStr1[j] = ListStr2[j] = "";
+                //                }
+                //            dateTm2 = dateTm2.AddDays(1);
+                //        }
+                //        Save_Day_mes(ListStr, ListStr1, ListStr2, ListStr3, HH_mm, numS);
+                //    }
 
 
             }
@@ -467,10 +469,10 @@ if (k==0)                   return;
             SavePredator.SavePredator SP = new SavePredator.SavePredator();
             SP.Load(pl.Sample);
             var BM = SP.Bookmarks;
-            if (checkBox4.Checked == true) SP.BM_Insert_Str("Time_Pov", pl.Date_POV);
-            if (checkBox3.Checked == true) SP.BM_Insert_Str("zona", pl.Room);
-            else
-                SP.BM_Insert_Str("zona", sensors[num].Zone);
+            //if (checkBox4.Checked == true) SP.BM_Insert_Str("Time_Pov", pl.Date_POV);
+            //if (checkBox3.Checked == true) SP.BM_Insert_Str("zona", pl.Room);
+            //else
+            //    SP.BM_Insert_Str("zona", sensors[num].Zone);
 
             SP.BM_Insert_Str("t_min", sensors[num].Tmin);
             SP.BM_Insert_Str("t_max", sensors[num].Tmax);
@@ -555,13 +557,13 @@ if (k==0)                   return;
             BinaryFormatter fmr = new BinaryFormatter();
 
             {
-                pl.Room = text_Room.Text;
+              //  pl.Room = text_Room.Text;
                 pl.DSN = text_DSN.Text;
                 pl.Report = text_Report.Text;
                 pl.Sample = text_Sample.Text;
-                pl.Date_POV = text_Date_POV.Text;
-                pl.Date_POV_check = checkBox4.Checked;
-                pl.Room_check = checkBox3.Checked;
+              //  pl.Date_POV = text_Date_POV.Text;
+              //  pl.Date_POV_check = checkBox4.Checked;
+              //  pl.Room_check = checkBox3.Checked;
 
             }
             Stream stmSaveWrite = new FileStream(Path_ini, FileMode.Create, FileAccess.Write, FileShare.None);
@@ -603,13 +605,13 @@ if (k==0)                   return;
                 {
                     bError = true;
                 }
-                text_Room.Text = pl.Room;
+                //text_Room.Text = pl.Room;
                 text_DSN.Text = pl.DSN;
                 text_Report.Text = pl.Report;
                 text_Sample.Text = pl.Sample;
-                text_Date_POV.Text = pl.Date_POV;
-                checkBox3.Checked= pl.Room_check;
-                checkBox4.Checked = pl.Date_POV_check;
+               // text_Date_POV.Text = pl.Date_POV;
+               // checkBox3.Checked= pl.Room_check;
+               // checkBox4.Checked = pl.Date_POV_check;
 
                 stmSaveRead.Close();
                  
@@ -633,29 +635,29 @@ if (k==0)                   return;
 
             RepDAYs.BM2 = !RepDAYs.BM2;
 
-            if (RepDAYs.BM2)
-            {
-                dateTimePicker1.Format = DateTimePickerFormat.Custom;
-                // Display the date as "Mon 27 Feb 2012".  
-                dateTimePicker1.CustomFormat = "HH:mm";
-            }
-            else
-            {
-                dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
-            }
+            //if (RepDAYs.BM2)
+            //{
+            //    dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            //    // Display the date as "Mon 27 Feb 2012".  
+            //    dateTimePicker1.CustomFormat = "HH:mm";
+            //}
+            //else
+            //{
+            //    dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
+            //}
 
 
-            DateTime dt = dateTimePicker1.Value;
-            //  dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+            //DateTime dt = dateTimePicker1.Value;
+            ////  dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
 
-            dateTimePicker1.MaxDate = DateTime.Now;
-            dateTimePicker_2_Time.MaxDate = DateTime.Now;
-            dateTimePicker_2_Time.Value = dateTimePicker1.Value;
+            //dateTimePicker1.MaxDate = DateTime.Now;
+            //dateTimePicker_2_Time.MaxDate = DateTime.Now;
+            //dateTimePicker_2_Time.Value = dateTimePicker1.Value;
 
-            RepDAYs.T11 = dateTimePicker1.Value.ToShortDateString();
-            RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
+            //RepDAYs.T11 = dateTimePicker1.Value.ToShortDateString();
+            //RepDAYs.T12 = dateTimePicker_2_Time.Value.ToString();
 
-            dateTimePicker1.Value = DateTime.Parse(RepDAYs.T11);
+            //dateTimePicker1.Value = DateTime.Parse(RepDAYs.T11);
 
         }
 
@@ -685,28 +687,28 @@ if (k==0)                   return;
 
         private void Form1_onSet_End(int val)
         {
-            if (Button_Exec_Report.InvokeRequired)
-            {
-                this.BeginInvoke(
-                    new AddProgressEventHandler(Form1_onSet_End),
-                    new object[] { val });
-            }
-            else
-            {
-                if (val ==-1)
-                { Button_Exec_Report.Text = "сформировать отчеты"; return; }
+            //if (Button_Exec_Report.InvokeRequired)
+            //{
+            //    this.BeginInvoke(
+            //        new AddProgressEventHandler(Form1_onSet_End),
+            //        new object[] { val });
+            //}
+            //else
+            //{
+            //    if (val ==-1)
+            //    { Button_Exec_Report.Text = "сформировать отчеты"; return; }
 
 
-                if (sensors.Count == 0) { Button_Exec_Report.Text = "соедениение с БД"; return; }
-                double D = 100.0 / (sensors.Count * val + 1);
+            //    if (sensors.Count == 0) { Button_Exec_Report.Text = "соедениение с БД"; return; }
+            //    double D = 100.0 / (sensors.Count * val + 1);
 
-                Button_Exec_Report.Text = val.ToString() + "%";
+            //    Button_Exec_Report.Text = val.ToString() + "%";
 
-                //if (val == sensors.Count-1)
-                //{
-                //    onProgress(100); Button_Exec_Report.Text = "Сформировать отчет";
-                //}
-            }
+            //    //if (val == sensors.Count-1)
+            //    //{
+            //    //    onProgress(100); Button_Exec_Report.Text = "Сформировать отчет";
+            //    //}
+            //}
 
         }
 
@@ -778,6 +780,62 @@ if (k==0)                   return;
         {
             if (p_odbcConnector!=null)
             p_odbcConnector.CloseConnection();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialButton2_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                p_odbcConnector = new OdbcConnector(pl.DSN);
+                p_odbcConnector.F_DB = true;
+
+                List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
+
+                List<String> Rez_Str = new List<string>();
+                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                {
+                    if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
+                    {
+                        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
+                    }
+                }
+                // Delete dublicates
+                List<String> myStringList = new List<string>();
+                //foreach (string s in Rez_Str)
+                //{
+                //    if (!myStringList.Contains(s))
+                //    {
+                //        myStringList.Add(s);
+                //    }
+                //}
+
+                // Excel_Add(List_Sensor_UID_NAME);
+                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                {
+                    //if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
+                    {
+                        UID_comboBox.Items.Add(List_Sensor_UID_NAME[i].UID);
+                        Name_comboBox.Items.Add(List_Sensor_UID_NAME[i].Name);
+                    }
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                Logger.GetInstanse().SetData("Get_UID_NAME_Sensor", ex.Message);
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
         }
     }
 
