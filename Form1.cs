@@ -474,19 +474,17 @@ if (k==0)                   return;
             string Sens_name = sensors[num].Name;
             //  Sens_name = "test.//\\";
             Sens_name = Sens_name.Replace(":", "_");
-            Sens_name = Sens_name.Replace(";", "_");
             Sens_name = Sens_name.Replace("/", "_");
             Sens_name = Sens_name.Replace("\"", "_");
             Sens_name = Sens_name.Replace("*", "_");
             Sens_name = Sens_name.Replace("?", "_");
             Sens_name = Sens_name.Replace("|", "_");
-            Sens_name = Sens_name.Replace("«", "_");
             Sens_name = Sens_name.Replace(">", "_");
             Sens_name = Sens_name.Replace("<", "_");
             Sens_name = Sens_name.Replace("\\", "_");
                
 
-            string doc_name = sensors[num].sType + "_" + Sens_name + "_" + sensors[num].UID + "_" + HH_mm + ".docx";    ///UniTesS THB - 1С 170434 
+            string doc_name = sensors[num].sType + " " + Sens_name + " " + sensors[num].UID + " " + HH_mm + ".docx";    ///UniTesS THB - 1С 170434 
             string S = path + "\\" + doc_name;
             SP.Save(S);
         }

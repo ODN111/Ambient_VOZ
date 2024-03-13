@@ -35,3 +35,6 @@ obj/Debug/ReportUT_.pdb
 .vs/ReportUT_/v16/.suo
 .vs/ReportUT_/v16/.suo
 *.vsidx
+bin/Debug/ReportUT_.exe
+bin/Debug/ReportUT_.pdb
+.vs/ReportUT_/v17/.suo

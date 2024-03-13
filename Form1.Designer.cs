@@ -180,7 +180,7 @@ namespace ReportUT_
             // text_Date_POV
             // 
             this.text_Date_POV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text_Date_POV.Location = new System.Drawing.Point(236, 53);
+            this.text_Date_POV.Location = new System.Drawing.Point(235, 53);
             this.text_Date_POV.Name = "text_Date_POV";
             this.text_Date_POV.Size = new System.Drawing.Size(465, 26);
             this.text_Date_POV.TabIndex = 12;
@@ -253,7 +253,7 @@ namespace ReportUT_
             // text_DSN
             // 
             this.text_DSN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text_DSN.Location = new System.Drawing.Point(234, 94);
+            this.text_DSN.Location = new System.Drawing.Point(235, 94);
             this.text_DSN.Name = "text_DSN";
             this.text_DSN.Size = new System.Drawing.Size(465, 26);
             this.text_DSN.TabIndex = 7;
@@ -261,7 +261,7 @@ namespace ReportUT_
             // text_Report
             // 
             this.text_Report.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text_Report.Location = new System.Drawing.Point(234, 135);
+            this.text_Report.Location = new System.Drawing.Point(235, 135);
             this.text_Report.Name = "text_Report";
             this.text_Report.Size = new System.Drawing.Size(465, 26);
             this.text_Report.TabIndex = 6;
@@ -269,7 +269,7 @@ namespace ReportUT_
             // text_Sample
             // 
             this.text_Sample.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text_Sample.Location = new System.Drawing.Point(234, 176);
+            this.text_Sample.Location = new System.Drawing.Point(235, 176);
             this.text_Sample.Name = "text_Sample";
             this.text_Sample.Size = new System.Drawing.Size(465, 26);
             this.text_Sample.TabIndex = 5;
