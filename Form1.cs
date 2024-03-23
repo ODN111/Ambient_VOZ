@@ -14,6 +14,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -118,6 +119,29 @@ namespace ReportUT_
             }
             return sList;
         }
+
+        public  String Get_UID_NAME_Sensor_by_NAME(String Name)
+        {
+            String SL = "";
+            for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                if (List_Sensor_UID_NAME[i].UID.Contains(Name))
+                    SL = SL+(List_Sensor_UID_NAME[i].Time + "   " + List_Sensor_UID_NAME[i].UID + "\n");
+            return SL;
+
+        }
+
+        public  String Get_UID_NAME_Sensor_by_UID(String UID)
+        {
+
+             String SL =  "";
+            for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                if (List_Sensor_UID_NAME[i].UID.Contains(UID))
+                    SL = SL+(List_Sensor_UID_NAME[i].Time +"   " + List_Sensor_UID_NAME[i].Name + "\n" );
+
+           return SL;
+        }
+
+
         private void Excel_Add(List<Sensor_UID_NAME> List_Sensor_UID_NAME)
         {
 
@@ -757,30 +781,26 @@ if (k==0)                   return;
 
             try
             {
-                p_odbcConnector = new OdbcConnector(pl.DSN);
-                p_odbcConnector.F_DB = true;
+                materialButton2_Click(sender, e);
 
-                List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
-
-                List<String> Rez_Str = new List<string>();
-                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                if (radioButton1.Checked)
                 {
-                      if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                    {
-                        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
-                    }
+                    
+                    string UID = UID_comboBox.Text;
+                    if (UID=="") return;
+                    MessageBox.Show ( Get_UID_NAME_Sensor_by_UID(UID).ToString());
                 }
-                // Delete dublicates
-                List<String> myStringList = new List<string>();
-                //foreach (string s in Rez_Str)
-                //{
-                //    if (!myStringList.Contains(s))
-                //    {
-                //        myStringList.Add(s);
-                //    }
-                //}
 
-                Excel_Add(List_Sensor_UID_NAME);
+                if (radioButton2.Checked)
+                {
+
+                    string Name = Name_comboBox.Text;
+                    if (Name == "") return;
+                    MessageBox.Show(Get_UID_NAME_Sensor_by_NAME(Name));
+                }
+
+
+                //  Excel_Add(List_Sensor_UID_NAME);
 
 
 
@@ -821,11 +841,10 @@ if (k==0)                   return;
 
                 // Delete dublicates
                 List<String> myStringList = new List<string>();
-                // ArrayList sList = new ArrayList();
-
+ 
                 for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                     myStringList.Add(List_Sensor_UID_NAME[i].UID);
-
+               UID_comboBox.Items.Clear();
                 UID_comboBox.Items.AddRange(Del_dubl(myStringList).ToArray());
 
                 List<String> myStringList1 = new List<string>();
@@ -833,6 +852,7 @@ if (k==0)                   return;
                 for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                     myStringList1.Add(List_Sensor_UID_NAME[i].Name);
 
+                Name_comboBox.Items.Clear();
                 Name_comboBox.Items.AddRange(Del_dubl(myStringList1).ToArray());
 
 
