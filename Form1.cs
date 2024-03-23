@@ -3,7 +3,9 @@
 using IniParser;
 using IniParser.Model;
 using OfficeOpenXml;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,7 +64,6 @@ namespace ReportUT_
 
        public  List<Sensor_UID_NAME> List_Sensor_UID_NAME = new List<Sensor_UID_NAME>();
 
-
         public Form1()
         {
             InitializeComponent();
@@ -102,7 +103,21 @@ namespace ReportUT_
 
         }
 
+        // Delete dublicates
+        public ArrayList Del_dubl(List<String> myStringList)
+        {
+            ArrayList sList = new ArrayList();
 
+            for (int i = 0; i < myStringList.Count; i++)
+            {
+                if (sList.Contains(myStringList[i]) == false)
+                {
+                    myStringList[i] = myStringList[i].Replace(",", String.Empty);
+                    sList.Add(myStringList[i]);
+                }
+            }
+            return sList;
+        }
         private void Excel_Add(List<Sensor_UID_NAME> List_Sensor_UID_NAME)
         {
 
@@ -124,7 +139,7 @@ namespace ReportUT_
                // sheet.Cells[2, 3].Value = "sasdf";
 
 
-                File.WriteAllBytes("Report.xlsx", package.GetAsByteArray());  //.Save(file);
+                File.WriteAllBytes(file, package.GetAsByteArray());  //.Save(file);
             }
             catch (System.Exception ex)
             {
@@ -585,6 +600,8 @@ if (k==0)                   return;
             string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_Log.txt";
             File.Create(logPath).Close();
 
+            materialButton2_Click(sender,e);
+
         }
 
         private void Deseril_Param()
@@ -799,32 +816,36 @@ if (k==0)                   return;
 
                 List<String> Rez_Str = new List<string>();
                 for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                {
                     if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                    {
                         List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
-                    }
-                }
+
                 // Delete dublicates
                 List<String> myStringList = new List<string>();
-                //foreach (string s in Rez_Str)
+                // ArrayList sList = new ArrayList();
+
+                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                    myStringList.Add(List_Sensor_UID_NAME[i].UID);
+
+                UID_comboBox.Items.AddRange(Del_dubl(myStringList).ToArray());
+
+                List<String> myStringList1 = new List<string>();
+
+                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                    myStringList1.Add(List_Sensor_UID_NAME[i].Name);
+
+                Name_comboBox.Items.AddRange(Del_dubl(myStringList1).ToArray());
+
+
+                //// Excel_Add(List_Sensor_UID_NAME);
+                //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                 //{
-                //    if (!myStringList.Contains(s))
+                //    //if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
                 //    {
-                //        myStringList.Add(s);
+                //       // UID_comboBox.Items.Add(List_Sensor_UID_NAME[i].UID);
+                //        Name_comboBox.Items.Add(List_Sensor_UID_NAME[i].Name);
                 //    }
                 //}
-
-                // Excel_Add(List_Sensor_UID_NAME);
-                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                {
-                    //if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                    {
-                        UID_comboBox.Items.Add(List_Sensor_UID_NAME[i].UID);
-                        Name_comboBox.Items.Add(List_Sensor_UID_NAME[i].Name);
-                    }
-                }
-
+         
 
 
             }

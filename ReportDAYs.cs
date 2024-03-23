@@ -12,12 +12,14 @@ using System.Text.RegularExpressions;
 using ADODB;
 using System.Windows.Documents;
 using static System.Net.Mime.MediaTypeNames;
+using System.Collections;
+using ReportUT_;
 
 namespace ReportUT_
 {
-    public class IniReader 
+    public class IniReader
     {
-       public static string Read(string Path1,string Key, string Section = "")
+        public static string Read(string Path1, string Key, string Section = "")
         {
             var parser = new FileIniDataParser();
             IniData ini = parser.ReadFile(Path1);
@@ -28,7 +30,7 @@ namespace ReportUT_
     {
         #region Singlton
         private static Logger instanse;
-       public static Logger GetInstanse()
+        public static Logger GetInstanse()
         {
             return instanse is null ? instanse = new Logger() : instanse;
         }
@@ -104,26 +106,26 @@ namespace ReportUT_
 
     public class Sensor_UID_NAME
     {
-       
+
         public string Time;
         public string Mes_LOg;
         public string UID;
         public string Name;
 
 
-        public  void Check_UID_in_Mes (String S)
+        public void Check_UID_in_Mes(String S)
         {
-          
+
             if (S != null)
             {
-               Mes_LOg = GetTextBetween(S, "UID:", " Период");
+                Mes_LOg = GetTextBetween(S, "UID:", "Перио");
                 string[] splitArray = new string[1] { "Имя:" };//Add the two strings to an array to split across each string in the array
                 string[] substrings = Mes_LOg.Split(splitArray, StringSplitOptions.None);//Get the substring
                 {
-                    if (substrings[0]  != null)
+                    if (substrings[0] != null)
                     {
                         UID = substrings[0].Trim();
-                         Name    =  substrings [1].Trim() ;
+                        Name = substrings[1].Trim();
                     }
                 }
 
@@ -131,23 +133,24 @@ namespace ReportUT_
 
         }
 
-        public   String GetTextBetween(string text, string findText1, string findText2)
+        public String GetTextBetween(string text, string findText1, string findText2)
         {
- 
+
             {
                 string[] splitArray = new string[2] { findText1, findText2 };//Add the two strings to an array to split across each string in the array
                 string[] substring = text.Split(splitArray, StringSplitOptions.None);//Get the substring
                 return substring[1];
-           }
-          
-        }
+            }
 
+        }
 
 
     }
 
 
-  
+
+
+
 
     public class SensorMes
     {
@@ -196,14 +199,14 @@ namespace ReportUT_
     }
     public class OdbcConnector
     {
-       public  bool F_DB = true;   //есть соед с БД
+        public bool F_DB = true;   //есть соед с БД
 
         private List<SensorMes> _sensorsMes = new List<SensorMes>();
 
         List<Sensor> sensors = new List<Sensor>();
         List<string> StrListRoom = new List<string>();
-    
-        
+
+
 
         public int[] type_to_min_temp = { 0, 0, 0, 0, 0, -25 };
         public int[] type_to_max_temp = { 50, 50, 50, 50, 50, 50 };
@@ -218,7 +221,7 @@ namespace ReportUT_
 
         public static OdbcConnection connection;
 
-        private static async Task ConnectWithDB(OdbcConnection connection )
+        private static async Task ConnectWithDB(OdbcConnection connection)
         {
             //    string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=usersdb;Integrated Security=True";
 
@@ -226,9 +229,9 @@ namespace ReportUT_
             //    using (OdbcConnection connection = new OdbcConnection(connectionString))
             //    {
             await connection.OpenAsync();
-        //        Console.WriteLine("Подключение открыто");
-        //    }
-        //    Console.WriteLine("Подключение закрыто...");
+            //        Console.WriteLine("Подключение открыто");
+            //    }
+            //    Console.WriteLine("Подключение закрыто...");
         }
 
 
@@ -251,13 +254,13 @@ namespace ReportUT_
                 }
             }
         }
-        public   void OpenConnection()
+        public void OpenConnection()
         {
             try
             {
                 // if (connection.DataSource!="")
 
-            // connection.OpenAsync();
+                // connection.OpenAsync();
                 connection.Open();
             }
             catch
@@ -298,13 +301,13 @@ namespace ReportUT_
 
             switch (TypeSens)  //sens_type = [2,             6,                 4,              8,                  12,                   14]
             {           //type_to_name = ['UniTesS THB-1', 'UniTesS THB-1С', 'UniTesS THB-1В', 'UniTesS THB-2', 'UniTesS THB-2В', 'UniTesS THB-2С']
- // if (sens.type == TYPE_THB2 || sens.type == TYPE_THB1C ||  //      sens.type == TYPE_THB1 || sens.type == TYPE_THB1B)  HUM
-//#define TYPE_THB1       0x02
-//#define TYPE_THB1B      0x04
-//#define TYPE_THB1C      0x06
-//#define TYPE_THB2       0x08
-//#define TYPE_THB2B      0x0C
-//#define TYPE_THB2C      0x0E
+                        // if (sens.type == TYPE_THB2 || sens.type == TYPE_THB1C ||  //      sens.type == TYPE_THB1 || sens.type == TYPE_THB1B)  HUM
+                        //#define TYPE_THB1       0x02
+                        //#define TYPE_THB1B      0x04
+                        //#define TYPE_THB1C      0x06
+                        //#define TYPE_THB2       0x08
+                        //#define TYPE_THB2B      0x0C
+                        //#define TYPE_THB2C      0x0E
 
                 default:
                     sensors[i].sType = "UniTesS THB-1";
@@ -345,21 +348,21 @@ namespace ReportUT_
                     sensors[i].sType = "UniTesS THB-2B";
                     sensors[i].Tmax = type_to_max_temp[4].ToString("0.0");
                     sensors[i].Tmin = type_to_min_temp[4].ToString("0.0");
-                  //  sensors[i].Hmax = type_to_max_hum[4].ToString("0.0");
-                  //  sensors[i].Hmin = type_to_min_hum[4].ToString("0.0");
+                    //  sensors[i].Hmax = type_to_max_hum[4].ToString("0.0");
+                    //  sensors[i].Hmin = type_to_min_hum[4].ToString("0.0");
                     break;
                 case (14):
                     sensors[i].sType = "UniTesS THB-2C";
                     sensors[i].Tmax = type_to_max_temp[5].ToString("0.0");
                     sensors[i].Tmin = type_to_min_temp[5].ToString("0.0");
-                   // sensors[i].Hmax = type_to_max_hum[5].ToString("0.0");
-                   // sensors[i].Hmin = type_to_min_hum[5].ToString("0.0");
+                    // sensors[i].Hmax = type_to_max_hum[5].ToString("0.0");
+                    // sensors[i].Hmin = type_to_min_hum[5].ToString("0.0");
                     break;
 
             }
         }
 
-        public SensorMes Get_DAY_MeasSensorId(List<SensorMes> Listsensor_Mes, int id, string Time1, 
+        public SensorMes Get_DAY_MeasSensorId(List<SensorMes> Listsensor_Mes, int id, string Time1,
             string Time2, int NumOperation)
         {
             SensorMes element = new SensorMes();
@@ -435,7 +438,7 @@ namespace ReportUT_
                         sensor_UID_NAME.Check_UID_in_Mes(sensor_UID_NAME.Mes_LOg);
                         List_Sensor_UID_NAME1.Add(sensor_UID_NAME);
                     }
-                       
+
                 }
                 this.CloseConnection();
                 return List_Sensor_UID_NAME1;
@@ -495,14 +498,14 @@ namespace ReportUT_
             {
                 OdbcConnector ODC = new OdbcConnector(DSN_Str);
                 // _sensors = new List<Sensor>();
-            
+
 
                 ODC.OpenConnection();
                 Sn = ODC.Get_DAY_MeasSensorId(LSM, id, Time1, Time2, NumOperation);
                 ODC.CloseConnection();
                 return Sn;
             }
-            
+
 
             catch (Exception exe)
             {
@@ -523,7 +526,7 @@ namespace ReportUT_
 
                 if (connection.DataSource == "")
                 {
-                   // MessageBox.Show("нет подключения к БД. \nВ настройках проверьте Источник данных(DSN)", "Ошибка");
+                    // MessageBox.Show("нет подключения к БД. \nВ настройках проверьте Источник данных(DSN)", "Ошибка");
                     F_DB = false;
                     return sensors;
                 }
@@ -534,7 +537,7 @@ namespace ReportUT_
 
                 try
                 {
-                     dataReader = command.ExecuteReader();
+                    dataReader = command.ExecuteReader();
                 }
 
                 catch (Exception exe)
@@ -592,7 +595,7 @@ namespace ReportUT_
                     SensorMes sensorMes = new SensorMes();
                     if (dataReader[0] != DBNull.Value)
                         sensorMes.TimeS = Convert.ToDateTime(dataReader[0]);
-                   Logger.GetInstanse().SetData(sensorMes.TimeS.ToString(), dataReader[1].ToString() );
+                    Logger.GetInstanse().SetData(sensorMes.TimeS.ToString(), dataReader[1].ToString());
                     if (dataReader[1] != DBNull.Value)
                         sensorMes.Temperature = Convert.ToSingle(dataReader[1]);
                     if (dataReader[2] != DBNull.Value)
@@ -629,7 +632,7 @@ namespace ReportUT_
                 for (int i = 0; i < Cnt; i++)
                 {
                     sensors[i].Zone = Get_RoomSensorId(sensors[i].Id);
-                     
+
                 }
                 this.CloseConnection();
                 return;
@@ -670,8 +673,6 @@ namespace ReportUT_
         public bool BT21 { get => bT2; set => bT2 = value; }
     }
 
-
 }
-
 
 
