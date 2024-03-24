@@ -111,9 +111,10 @@ namespace ReportUT_
 
             for (int i = 0; i < myStringList.Count; i++)
             {
-                if (sList.Contains(myStringList[i]) == false)
+                myStringList[i] = myStringList[i].Replace(",", String.Empty);
+                if (sList.Contains(myStringList[i]) == false )
                 {
-                    myStringList[i] = myStringList[i].Replace(",", String.Empty);
+                   
                     sList.Add(myStringList[i]);
                 }
             }
@@ -124,7 +125,7 @@ namespace ReportUT_
         {
             String SL = "";
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                if (List_Sensor_UID_NAME[i].UID.Contains(Name))
+                if (List_Sensor_UID_NAME[i].Name.Contains(Name))
                     SL = SL+(List_Sensor_UID_NAME[i].Time + "   " + List_Sensor_UID_NAME[i].UID + "\n");
             return SL;
 
@@ -788,7 +789,7 @@ if (k==0)                   return;
                     
                     string UID = UID_comboBox.Text;
                     if (UID=="") return;
-                    MessageBox.Show ( Get_UID_NAME_Sensor_by_UID(UID).ToString());
+                    MessageBox.Show ("                  Names \n\n" + Get_UID_NAME_Sensor_by_UID(UID).ToString(), "UID:  "+ UID);
                 }
 
                 if (radioButton2.Checked)
@@ -796,7 +797,7 @@ if (k==0)                   return;
 
                     string Name = Name_comboBox.Text;
                     if (Name == "") return;
-                    MessageBox.Show(Get_UID_NAME_Sensor_by_NAME(Name));
+                    MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
                 }
 
 
@@ -855,6 +856,14 @@ if (k==0)                   return;
                 Name_comboBox.Items.Clear();
                 Name_comboBox.Items.AddRange(Del_dubl(myStringList1).ToArray());
 
+                //Name_comboBox.SelectedItem = 0;
+                this.UID_comboBox.SelectedIndex = 0;
+
+                this.Name_comboBox.SelectedIndex = 0;
+
+
+                // UID_comboBox.Text = UID_comboBox.Items[0].ToString();
+
 
                 //// Excel_Add(List_Sensor_UID_NAME);
                 //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
@@ -865,7 +874,7 @@ if (k==0)                   return;
                 //        Name_comboBox.Items.Add(List_Sensor_UID_NAME[i].Name);
                 //    }
                 //}
-         
+
 
 
             }
@@ -877,6 +886,16 @@ if (k==0)                   return;
             }
 
 
+        }
+
+        private void UID_comboBox_Click(object sender, EventArgs e)
+        {
+            radioButton1.Checked = true;
+        }
+
+        private void Name_comboBox_Click(object sender, EventArgs e)
+        {
+            radioButton2.Checked = true;
         }
     }
 
