@@ -66,15 +66,18 @@ namespace ReportUT_
             this.label_Count = new System.Windows.Forms.Label();
             this.Button_Settings = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Name_comboBox);
@@ -94,7 +97,7 @@ namespace ReportUT_
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(649, 6);
+            this.label5.Location = new System.Drawing.Point(660, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 18);
             this.label5.TabIndex = 28;
@@ -113,7 +116,7 @@ namespace ReportUT_
             // Name_comboBox
             // 
             this.Name_comboBox.FormattingEnabled = true;
-            this.Name_comboBox.Location = new System.Drawing.Point(599, 30);
+            this.Name_comboBox.Location = new System.Drawing.Point(612, 30);
             this.Name_comboBox.Name = "Name_comboBox";
             this.Name_comboBox.Size = new System.Drawing.Size(146, 24);
             this.Name_comboBox.TabIndex = 26;
@@ -122,7 +125,7 @@ namespace ReportUT_
             // UID_comboBox
             // 
             this.UID_comboBox.FormattingEnabled = true;
-            this.UID_comboBox.Location = new System.Drawing.Point(413, 30);
+            this.UID_comboBox.Location = new System.Drawing.Point(426, 30);
             this.UID_comboBox.Name = "UID_comboBox";
             this.UID_comboBox.Size = new System.Drawing.Size(146, 24);
             this.UID_comboBox.TabIndex = 25;
@@ -131,7 +134,7 @@ namespace ReportUT_
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(581, 36);
+            this.radioButton2.Location = new System.Drawing.Point(594, 36);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(14, 13);
             this.radioButton2.TabIndex = 24;
@@ -141,7 +144,7 @@ namespace ReportUT_
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(396, 36);
+            this.radioButton1.Location = new System.Drawing.Point(409, 36);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(14, 13);
             this.radioButton1.TabIndex = 23;
@@ -435,6 +438,18 @@ namespace ReportUT_
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 303);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureBox1.Image = global::ReportUT_.Properties.Resources.loading_load;
+            this.pictureBox1.Location = new System.Drawing.Point(358, 20);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(42, 42);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -465,6 +480,7 @@ namespace ReportUT_
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -500,6 +516,7 @@ namespace ReportUT_
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private MaterialSkin.Controls.MaterialButton materialButton2;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AmbientIco.ico" />
+    <None Include="src\loading-load.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

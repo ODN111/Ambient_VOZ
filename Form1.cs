@@ -625,6 +625,9 @@ if (k==0)                   return;
             string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_Log.txt";
             File.Create(logPath).Close();
 
+            //pictureBox1.Image = global::webinterface.Properties.Resources.res; //картинка
+           // pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage; //растягивать
+
             try
             {
             materialButton2_Click(sender,e);
@@ -844,10 +847,10 @@ if (k==0)                   return;
 
                 List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
 
-                List<String> Rez_Str = new List<string>();
-                for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                    if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
+                //List<String> Rez_Str = new List<string>();
+                //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
+                //    if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
+                //        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
 
                 //// Delete dublicates
                 List<String> myStringList = new List<string>();
@@ -869,10 +872,6 @@ if (k==0)                   return;
                 this.UID_comboBox.SelectedIndex = 0;
                 if (Name_comboBox.Items.Count > 0)
                     this.Name_comboBox.SelectedIndex = 0;
-
-
-                // UID_comboBox.Text = UID_comboBox.Items[0].ToString();
-
 
                 //// Excel_Add(List_Sensor_UID_NAME);
                 //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
