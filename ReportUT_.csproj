@@ -7,8 +7,8 @@
     <ProjectGuid>{2208C560-9143-4CCE-8591-47C585B2E840}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ReportUT_</RootNamespace>
-    <AssemblyName>ReportUT_</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <AssemblyName>ReportUID_NAME</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <PublishUrl>publish\</PublishUrl>

@@ -625,7 +625,16 @@ if (k==0)                   return;
             string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_Log.txt";
             File.Create(logPath).Close();
 
+            try
+            {
             materialButton2_Click(sender,e);
+            }
+            catch (System.Exception ex)
+            {
+                Logger.GetInstanse().SetData("Form1_Load: ", ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+
 
         }
 
@@ -840,7 +849,7 @@ if (k==0)                   return;
                     if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
                         List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
 
-                // Delete dublicates
+                //// Delete dublicates
                 List<String> myStringList = new List<string>();
  
                 for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
@@ -856,10 +865,10 @@ if (k==0)                   return;
                 Name_comboBox.Items.Clear();
                 Name_comboBox.Items.AddRange(Del_dubl(myStringList1).ToArray());
 
-                //Name_comboBox.SelectedItem = 0;
+                if (UID_comboBox.Items.Count>0)
                 this.UID_comboBox.SelectedIndex = 0;
-
-                this.Name_comboBox.SelectedIndex = 0;
+                if (Name_comboBox.Items.Count > 0)
+                    this.Name_comboBox.SelectedIndex = 0;
 
 
                 // UID_comboBox.Text = UID_comboBox.Items[0].ToString();
