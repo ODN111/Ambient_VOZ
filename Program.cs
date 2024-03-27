@@ -7,10 +7,12 @@ using System.Threading;
 
 namespace ReportUT_
 {
+
     static class Program
     {
         private static Mutex _syncObject;
         private const string _syncObjectName = "{E777FA11-AE0D-480e-9FCA-4BE9B8CDB4E9}";
+
         /// 
         /// Главная точка входа для приложения.
         /// 

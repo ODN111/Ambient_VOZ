@@ -63,21 +63,18 @@ namespace ReportUT_
             this.panel4 = new System.Windows.Forms.Panel();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
-            this.label_Count = new System.Windows.Forms.Label();
             this.Button_Settings = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label_Count = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Name_comboBox);
@@ -334,7 +331,6 @@ namespace ReportUT_
             this.panel4.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel4.Controls.Add(this.materialButton2);
             this.panel4.Controls.Add(this.materialButton1);
-            this.panel4.Controls.Add(this.label_Count);
             this.panel4.Controls.Add(this.Button_Settings);
             this.panel4.Location = new System.Drawing.Point(3, 219);
             this.panel4.Name = "panel4";
@@ -349,7 +345,7 @@ namespace ReportUT_
             this.materialButton2.Depth = 0;
             this.materialButton2.HighEmphasis = true;
             this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(514, 14);
+            this.materialButton2.Location = new System.Drawing.Point(512, 8);
             this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton2.Name = "materialButton2";
@@ -360,7 +356,6 @@ namespace ReportUT_
             this.materialButton2.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             this.materialButton2.UseAccentColor = false;
             this.materialButton2.UseVisualStyleBackColor = true;
-            this.materialButton2.Visible = false;
             this.materialButton2.Click += new System.EventHandler(this.materialButton2_Click);
             // 
             // materialButton1
@@ -371,7 +366,7 @@ namespace ReportUT_
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(320, 14);
+            this.materialButton1.Location = new System.Drawing.Point(320, 8);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
@@ -384,17 +379,6 @@ namespace ReportUT_
             this.materialButton1.UseVisualStyleBackColor = true;
             this.materialButton1.Click += new System.EventHandler(this.materialButton1_Click);
             // 
-            // label_Count
-            // 
-            this.label_Count.AutoSize = true;
-            this.label_Count.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label_Count.Location = new System.Drawing.Point(31, 14);
-            this.label_Count.Name = "label_Count";
-            this.label_Count.Size = new System.Drawing.Size(166, 18);
-            this.label_Count.TabIndex = 22;
-            this.label_Count.Text = "Всего / Обработано";
-            this.label_Count.Visible = false;
-            // 
             // Button_Settings
             // 
             this.Button_Settings.AutoSize = false;
@@ -403,7 +387,7 @@ namespace ReportUT_
             this.Button_Settings.Depth = 0;
             this.Button_Settings.HighEmphasis = true;
             this.Button_Settings.Icon = ((System.Drawing.Image)(resources.GetObject("Button_Settings.Icon")));
-            this.Button_Settings.Location = new System.Drawing.Point(273, 14);
+            this.Button_Settings.Location = new System.Drawing.Point(273, 8);
             this.Button_Settings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Button_Settings.MouseState = MaterialSkin.MouseState.HOVER;
             this.Button_Settings.Name = "Button_Settings";
@@ -438,17 +422,16 @@ namespace ReportUT_
             this.tableLayoutPanel1.Size = new System.Drawing.Size(784, 303);
             this.tableLayoutPanel1.TabIndex = 22;
             // 
-            // pictureBox1
+            // label_Count
             // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox1.Image = global::ReportUT_.Properties.Resources.loading_load;
-            this.pictureBox1.Location = new System.Drawing.Point(358, 20);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(42, 42);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
+            this.label_Count.AutoSize = true;
+            this.label_Count.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_Count.Location = new System.Drawing.Point(320, 366);
+            this.label_Count.Name = "label_Count";
+            this.label_Count.Size = new System.Drawing.Size(166, 18);
+            this.label_Count.TabIndex = 23;
+            this.label_Count.Text = "Всего / Обработано";
+            this.label_Count.Visible = false;
             // 
             // Form1
             // 
@@ -458,6 +441,7 @@ namespace ReportUT_
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(784, 467);
+            this.Controls.Add(this.label_Count);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.progressBar1);
             this.DoubleBuffered = true;
@@ -478,9 +462,7 @@ namespace ReportUT_
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,7 +489,6 @@ namespace ReportUT_
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label_Count;
         private MaterialSkin.Controls.MaterialButton materialButton1;
         private System.Windows.Forms.ComboBox Name_comboBox;
         private System.Windows.Forms.ComboBox UID_comboBox;
@@ -516,7 +497,7 @@ namespace ReportUT_
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label1;
         private MaterialSkin.Controls.MaterialButton materialButton2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label_Count;
     }
 }
 

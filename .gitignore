@@ -37,3 +37,9 @@ obj/Debug/ReportUT_.pdb
 
 bin/Debug/ReportUT_.exe
 bin/Debug/ReportUT_.pdb
+*.vsidx
+/.vs/ReportUT_/v17
+*.config
+*.config
+*.config
+*.csproj

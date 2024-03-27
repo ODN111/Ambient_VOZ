@@ -16,6 +16,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 using System.Windows.Forms;
@@ -27,6 +28,7 @@ namespace ReportUT_
 {
 
     delegate void AddProgressEventHandler(int val);
+
 
     public partial class Form1 : Form  /// MaterialForm  
     {
@@ -126,7 +128,11 @@ namespace ReportUT_
             String SL = "";
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                 if (List_Sensor_UID_NAME[i].Name.Contains(Name))
+                {
+                    List_Sensor_UID_NAME[i].UID = List_Sensor_UID_NAME[i].UID.Replace(",", String.Empty);
                     SL = SL+(List_Sensor_UID_NAME[i].Time + "   " + List_Sensor_UID_NAME[i].UID + "\n");
+                }
+                    
             return SL;
 
         }
@@ -137,7 +143,11 @@ namespace ReportUT_
              String SL =  "";
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                 if (List_Sensor_UID_NAME[i].UID.Contains(UID))
+                {
+                    List_Sensor_UID_NAME[i].Name = List_Sensor_UID_NAME[i].Name.Replace(",", String.Empty);
                     SL = SL+(List_Sensor_UID_NAME[i].Time +"   " + List_Sensor_UID_NAME[i].Name + "\n" );
+                }
+                    
 
            return SL;
         }
@@ -258,8 +268,8 @@ namespace ReportUT_
         {
             int Moun = 0;
 
-       
-            //if (checkBox1.Checked)
+
+            ////if (checkBox1.Checked)
             //{
             //    Moun = dateTimePicker_Stop_Time.Value.Month - dateTimePicker1.Value.Month;
             //    if (dateTimePicker_Start_Time.Value > dateTimePicker_Stop_Time.Value)
@@ -310,6 +320,7 @@ namespace ReportUT_
           
            // RepDAYs.dateT1 = dateTimePicker1.Value;
            // RepDAYs.dateT2 = dateTimePicker_2_Time.Value;
+
             #region [ Task.Run(()]
      
             Task.Run(() =>
@@ -630,7 +641,7 @@ if (k==0)                   return;
 
             try
             {
-            materialButton2_Click(sender,e);
+           // materialButton2_Click(sender,e);
             }
             catch (System.Exception ex)
             {
@@ -794,7 +805,10 @@ if (k==0)                   return;
 
             try
             {
-                materialButton2_Click(sender, e);
+                if (onProgress != null) onProgress(10);
+                Application.DoEvents();
+
+               // materialButton2_Click(sender, e);
 
                 if (radioButton1.Checked)
                 {
@@ -812,6 +826,7 @@ if (k==0)                   return;
                     MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
                 }
 
+                if (onProgress != null) onProgress(0);
 
                 //  Excel_Add(List_Sensor_UID_NAME);
 
@@ -845,20 +860,23 @@ if (k==0)                   return;
                 p_odbcConnector = new OdbcConnector(pl.DSN);
                 p_odbcConnector.F_DB = true;
 
+                if (onProgress != null) onProgress(30);
+                Application.DoEvents();
+                Thread.Sleep(1000);
+
                 List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
 
-                //List<String> Rez_Str = new List<string>();
-                //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                //    if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                //        List_Sensor_UID_NAME[i].Check_UID_in_Mes(List_Sensor_UID_NAME[i].Mes_LOg);
-
-                //// Delete dublicates
+                 //// Delete dublicates
                 List<String> myStringList = new List<string>();
  
                 for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                     myStringList.Add(List_Sensor_UID_NAME[i].UID);
                UID_comboBox.Items.Clear();
                 UID_comboBox.Items.AddRange(Del_dubl(myStringList).ToArray());
+
+                if (onProgress != null) onProgress(90);
+                Application.DoEvents();
+                Thread.Sleep(1000);
 
                 List<String> myStringList1 = new List<string>();
 
@@ -873,17 +891,15 @@ if (k==0)                   return;
                 if (Name_comboBox.Items.Count > 0)
                     this.Name_comboBox.SelectedIndex = 0;
 
+                if (onProgress != null) onProgress(100);
+                Application.DoEvents();
+                Thread.Sleep(1200);
+
                 //// Excel_Add(List_Sensor_UID_NAME);
-                //for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
-                //{
-                //    //if (List_Sensor_UID_NAME[i].Mes_LOg.Contains("UID:"))
-                //    {
-                //       // UID_comboBox.Items.Add(List_Sensor_UID_NAME[i].UID);
-                //        Name_comboBox.Items.Add(List_Sensor_UID_NAME[i].Name);
-                //    }
-                //}
+ 
 
-
+                if (onProgress != null) onProgress(1);
+                Application.DoEvents();
 
             }
             catch (Exception ex)
@@ -905,6 +921,8 @@ if (k==0)                   return;
         {
             radioButton2.Checked = true;
         }
+
+       
     }
 
 
