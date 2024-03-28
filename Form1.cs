@@ -76,10 +76,10 @@ namespace ReportUT_
             onLabelText += new AddProgressEventHandler(Form1_onLabelText);
             onSet_End += new AddProgressEventHandler(Form1_onSet_End);
 
-           // dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-          //  dateTimePicker_2_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-            dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
-            dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month-1, 1, dt.Hour, dt.Minute, dt.Second);
+            // dateTimePicker1.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+            //  dateTimePicker_2_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+           // dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+           // dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month , 1, dt.Hour , dt.Minute, dt.Second);
            // dateTimePicker1.Format = DateTimePickerFormat.Custom;
            // dateTimePicker1.CustomFormat = "yyyy MMMM HH:mm";
            // dateTimePicker1.ShowUpDown = true;
@@ -241,18 +241,22 @@ namespace ReportUT_
 
         private void dateTimePicker_Start_Time_ValueChanged(object sender, EventArgs e)
         {
-            DateTime dt = dateTimePicker_Start_Time.Value;
-          //  dateTimePicker1.Value = dt;//
-            dateTimePicker_Stop_Time.Value = dt;
-            // RepDAYs.M11 = dateTimePicker_Start_Time.Value.ToString();
+   //         if (dateTimePicker_Start_Time.Value > dateTimePicker_Stop_Time.Value)
+   //         {
+   //             MessageBox.Show("начало периода  " + dateTimePicker_Start_Time.Value.ToString() +
+   //"\nне может превышать его окончание  " + dateTimePicker_Stop_Time.Value.ToString() +
+   //"\n(начальная дата должна быть  меньше конечной)  ", "Ошибка");
+   //            // dateTimePicker_Stop_Time.Value = DateTime.Now;
+   //             return;
+   //         }
         }
 
         private void dateTimePicker_Stop_Time_ValueChanged(object sender, EventArgs e)
         {
-            DateTime dt = dateTimePicker_Stop_Time.Value;
-            // RepDAYs.M21 = dateTimePicker_Stop_Time.Value.ToString();
-        }
+             
 
+        }
+     
         private void Button_Reports_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.Description = "Выбор местоположения для жуналов учета";
@@ -857,12 +861,25 @@ if (k==0)                   return;
 
             try
             {
+
+                if (dateTimePicker_Start_Time.Value > dateTimePicker_Stop_Time.Value)
+                {
+                    MessageBox.Show("начало периода  " + dateTimePicker_Start_Time.Value.ToString() +
+       "\nне может превышать его окончание  " + dateTimePicker_Stop_Time.Value.ToString() +
+       "\n(начальная дата должна быть  меньше конечной)  ", "Ошибка");
+                    // dateTimePicker_Stop_Time.Value = DateTime.Now;
+                    return;
+                }
+
                 p_odbcConnector = new OdbcConnector(pl.DSN);
                 p_odbcConnector.F_DB = true;
 
                 if (onProgress != null) onProgress(30);
                 Application.DoEvents();
                 Thread.Sleep(1000);
+
+                string ST1 = dateTimePicker_Start_Time.Value.ToString();
+                string ST2 = dateTimePicker_Stop_Time.Value.ToString();
 
                 List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
 
