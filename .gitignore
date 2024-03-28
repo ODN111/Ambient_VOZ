@@ -43,3 +43,4 @@ bin/Debug/ReportUT_.pdb
 *.config
 *.config
 *.csproj
+/.vs
