@@ -616,7 +616,7 @@ if (k==0)                   return;
                 pl.DSN = text_DSN.Text;
                 pl.Report = text_Report.Text;
                 pl.Sample = text_Sample.Text;
-              //  pl.Date_POV = text_Date_POV.Text;
+               //  pl.Date_POV = text_Date_POV.Text;
               //  pl.Date_POV_check = checkBox4.Checked;
               //  pl.Room_check = checkBox3.Checked;
 
@@ -660,10 +660,15 @@ if (k==0)                   return;
         {
             BinaryFormatter fmr = new BinaryFormatter();
 
-            if (File.Exists(Path_ini))
+            if (!File.Exists(Path_ini))
+                  
+                    {
+                        Stream stmSaveWrite = new FileStream(Path_ini, FileMode.Create, FileAccess.Write, FileShare.None);
+                        fmr.Serialize(stmSaveWrite, pl);
+                        stmSaveWrite.Close();
+                    }
             {
 
-                //("POS file = " + sPOSFile);
                 Stream stmSaveRead = new FileStream(Path_ini, FileMode.Open, FileAccess.Read, FileShare.Read);
                 bool bError = false;
                 try
@@ -678,9 +683,12 @@ if (k==0)                   return;
                 text_DSN.Text = pl.DSN;
                 text_Report.Text = pl.Report;
                 text_Sample.Text = pl.Sample;
-               // text_Date_POV.Text = pl.Date_POV;
-               // checkBox3.Checked= pl.Room_check;
-               // checkBox4.Checked = pl.Date_POV_check;
+                //*text_Date_POV.Text*/ string S1 = pl.Date_POV;
+                // checkBox3.Checked= pl.Room_check;
+                // checkBox4.Checked = pl.Date_POV_check;
+                string S1 = pl.Date_POV; 
+                bool S2 = pl.Room_check;
+                bool S3 = pl.Date_POV_check;
 
                 stmSaveRead.Close();
                  
@@ -692,6 +700,8 @@ if (k==0)                   return;
                 }
 
             }
+       
+       
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -878,10 +888,18 @@ if (k==0)                   return;
                 Application.DoEvents();
                 Thread.Sleep(1000);
 
+                DateTime dt;
+
+
+                dt = dateTimePicker_Stop_Time.Value;
+                dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+                dt = dateTimePicker_Start_Time.Value;
+                dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+
                 string ST1 = dateTimePicker_Start_Time.Value.ToString();
                 string ST2 = dateTimePicker_Stop_Time.Value.ToString();
 
-                List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor();
+                List_Sensor_UID_NAME = p_odbcConnector.Get_UID_NAME_Sensor(ST1, ST2);
 
                  //// Delete dublicates
                 List<String> myStringList = new List<string>();

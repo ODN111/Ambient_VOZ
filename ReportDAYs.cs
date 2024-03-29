@@ -217,7 +217,9 @@ namespace ReportUT_
         private static string SELECT_ALL_SENSORS = "SELECT  ID_SENS, SENS_NAME, SENS_TYPE, SENS_UID FROM S_CONDITIONAL_SENSORS     order by  ID_SENS ";
         private static string SELECT_ROOM_SENSORS = "SELECT ROOM_NAME FROM S_AMBIENT_MAP_ICO WHERE ROOM_ID = (SELECT MAP_ID FROM S_AMBIENT_MAP_THB WHERE THB_ID= ";
         static string SELECT_ALL_SENSORS_MES = "select  tcon.tcon_time,  tcon.tcon_temp,  tcon.tcon_hum,  tcon.tcon_pres,  tcon.id_sens from i_test_conditions tcon where tcon.tcon_time >=";
-        private static string SELECT_UID_SENSORS = "select LOG_TIME, LOG_TEXT from S_AMBIENT_LOG   order by  LOG_TIME ";
+        //  private static string SELECT_UID_SENSORS = "select LOG_TIME, LOG_TEXT from S_AMBIENT_LOG   order by  LOG_TIME ";
+
+        private static string SELECT_UID_SENSORS = "select LOG_TIME, LOG_TEXT from S_AMBIENT_LOG where LOG_TIME >= ";
 
         public static OdbcConnection connection;
 
@@ -391,15 +393,20 @@ namespace ReportUT_
             }
         }
 
-
-
-        public List<Sensor_UID_NAME> Get_UID_NAME_Sensor()
+          public List<Sensor_UID_NAME> Get_UID_NAME_Sensor(string Time1,string Time2 )
         {
-            string operationMessage = "AllSensors";
+            string operationMessage = "Get_UID_NAME_Sensor";
             OdbcDataReader dataReader;
             List<Sensor_UID_NAME> List_Sensor_UID_NAME1 = new List<Sensor_UID_NAME>();
-            try
+                        try
             {
+
+                Time1 = Time1.Replace("-", ".");
+                Time1 = Time1.Replace("/", ".");
+
+                Time2 = Time2.Replace("-", ".");
+                Time2 = Time2.Replace("/", ".");
+
                 this.OpenConnection();
 
                 if (connection.DataSource == "")
@@ -410,7 +417,8 @@ namespace ReportUT_
                 }
                 OdbcCommand command = connection.CreateCommand();
                 command.CommandTimeout = 0;
-                command.CommandText = SELECT_UID_SENSORS;
+                //    select LOG_TIME, LOG_TEXT from S_AMBIENT_LOG  where LOG_TIME >= '04.12.2023' and    LOG_TIME <= '04.02.2024'
+                command.CommandText = SELECT_UID_SENSORS +"'" + Time1 + "'" + " and LOG_TIME <=" + "'" + Time2 + "'" + "   order by  LOG_TIME"; ;
                 System.Threading.Thread.Sleep(3000);
 
                 try
