@@ -345,7 +345,7 @@ namespace ReportUT_
             this.materialButton2.Depth = 0;
             this.materialButton2.HighEmphasis = true;
             this.materialButton2.Icon = null;
-            this.materialButton2.Location = new System.Drawing.Point(512, 8);
+            this.materialButton2.Location = new System.Drawing.Point(417, 8);
             this.materialButton2.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton2.Name = "materialButton2";
@@ -366,7 +366,7 @@ namespace ReportUT_
             this.materialButton1.Depth = 0;
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(320, 8);
+            this.materialButton1.Location = new System.Drawing.Point(225, 8);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
@@ -387,7 +387,7 @@ namespace ReportUT_
             this.Button_Settings.Depth = 0;
             this.Button_Settings.HighEmphasis = true;
             this.Button_Settings.Icon = ((System.Drawing.Image)(resources.GetObject("Button_Settings.Icon")));
-            this.Button_Settings.Location = new System.Drawing.Point(273, 8);
+            this.Button_Settings.Location = new System.Drawing.Point(178, 6);
             this.Button_Settings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Button_Settings.MouseState = MaterialSkin.MouseState.HOVER;
             this.Button_Settings.Name = "Button_Settings";

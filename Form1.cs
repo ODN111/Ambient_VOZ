@@ -51,7 +51,7 @@ namespace ReportUT_
 
         //string SS = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
         string Path_ini = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) +
-            "\\UniTesS\\AmbientRepService.dat";
+            "\\UniTesS\\AmbientUDPService.dat";
 
 
         private Params pl = new Params();
@@ -694,7 +694,7 @@ if (k==0)                   return;
                  
                 if (bError)
                 {
-                    MessageBox.Show("Error reading AmbientRepService.dat");
+                    MessageBox.Show("Error reading AmbientUDPService.dat");
                     stmSaveRead.Close();
                     return;
                 }
@@ -819,6 +819,8 @@ if (k==0)                   return;
 
             try
             {
+               // materialButton2_Click(sender,e);
+
                 if (onProgress != null) onProgress(10);
                 Application.DoEvents();
 
@@ -928,10 +930,18 @@ if (k==0)                   return;
 
                 if (onProgress != null) onProgress(100);
                 Application.DoEvents();
-                Thread.Sleep(1200);
+                Thread.Sleep(1000);
+
+                if (List_Sensor_UID_NAME.Count <= 0)
+                {
+                    MessageBox.Show("                      НЕТ ДАННЫХ \n\n"+"начало периода  " + dateTimePicker_Start_Time.Value.ToString() +
+       "\nокончание периода " + dateTimePicker_Stop_Time.Value.ToString(), "                       Сообщение");
+                    return;
+                }
+
 
                 //// Excel_Add(List_Sensor_UID_NAME);
- 
+
 
                 if (onProgress != null) onProgress(1);
                 Application.DoEvents();
