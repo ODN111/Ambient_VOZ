@@ -45,6 +45,20 @@ namespace ReportUT_
         }
 
 
+        public void ShowMyDialogBox_E(string S, String  LS)
+                   // public void ShowMyDialogBox_E(string S, List<String> LS)
+        {
+            MsgBoxExampleForm testDialog = new MsgBoxExampleForm(S,LS );
+
+            //testDialog.Text = "Результат";
+            if (testDialog.ShowDialog(this) == DialogResult.OK)
+            {
+                ;
+            }
+            testDialog.Dispose();
+        }
+
+
         private event AddProgressEventHandler onProgress;
         private event AddProgressEventHandler onLabelText;
         private event AddProgressEventHandler onSet_End;
@@ -816,6 +830,7 @@ if (k==0)                   return;
 
         private void materialButton1_Click(object sender, EventArgs e)
         {
+           
 
             try
             {
@@ -831,7 +846,11 @@ if (k==0)                   return;
                     
                     string UID = UID_comboBox.Text;
                     if (UID=="") return;
-                    MessageBox.Show ("                  Names \n\n" + Get_UID_NAME_Sensor_by_UID(UID).ToString(), "UID:  "+ UID);
+
+                    Action action = () => ShowMyDialogBox_E("UID:  " + UID, Get_UID_NAME_Sensor_by_UID(UID).ToString());
+                    if (InvokeRequired)  Invoke(action);   else  action();
+
+                    //MessageBox.Show ("                  Names \n\n" + Get_UID_NAME_Sensor_by_UID(UID).ToString(), "UID:  "+ UID);
                 }
 
                 if (radioButton2.Checked)
@@ -839,7 +858,9 @@ if (k==0)                   return;
 
                     string Name = Name_comboBox.Text;
                     if (Name == "") return;
-                    MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
+                    Action action = () => ShowMyDialogBox_E("Name:  " + Name, Get_UID_NAME_Sensor_by_UID(Name).ToString());
+                    if (InvokeRequired) Invoke(action); else action();
+                    // MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
                 }
 
                 if (onProgress != null) onProgress(0);
