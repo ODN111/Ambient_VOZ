@@ -682,27 +682,25 @@ if (k==0)                   return;
               //  pl.Room_check = checkBox3.Checked;
 
             }
-            Stream stmSaveWrite = new FileStream(Path_ini, FileMode.Create, FileAccess.Write, FileShare.None);
+            Stream stmSaveWrite = new FileStream(Path_ini, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             fmr.Serialize(stmSaveWrite, pl);
             stmSaveWrite.Close();
         }
-
+//---------------------------------------------------------------------------------------------------------------------
         private void Form1_Load(object sender, EventArgs e)
         {
             Deseril_Param();
-            string path = "C:\\Users\\Public\\Documents\\UniTesS\\UniTessAS.ini";
-            string Alias = "";
-            if (File.Exists(path))
-            {
-                Alias = IniReader.Read(path, "DBAlias", "UniTesS%20Ambient%20Software");
-                if (Alias != null && Alias != "")
-                    text_DSN.Text = Alias;
-            }
+            //string path = "C:\\Users\\Public\\Documents\\UniTesS\\UniTessAS.ini";
+            //string Alias = "";
+            //if (File.Exists(path))
+            //{
+            //    Alias = IniReader.Read(path, "DBAlias", "UniTesS%20Ambient%20Software");
+            //    if (Alias != null && Alias != "")
+            //        text_DSN.Text = Alias;
+            //}
+            text_DSN.Text = pl.DSN;
             string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_Log.txt";
             File.Create(logPath).Close();
-
-            //pictureBox1.Image = global::webinterface.Properties.Resources.res; //картинка
-           // pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage; //растягивать
 
             try
             {
@@ -730,7 +728,7 @@ if (k==0)                   return;
                     }
             {
 
-                Stream stmSaveRead = new FileStream(Path_ini, FileMode.Open, FileAccess.Read, FileShare.Read);
+                Stream stmSaveRead = new FileStream(Path_ini, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
                 bool bError = false;
                 try
                 {
