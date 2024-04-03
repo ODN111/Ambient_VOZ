@@ -2,6 +2,7 @@
 
 using IniParser;
 using IniParser.Model;
+using Microsoft.Win32;
 using OfficeOpenXml;
 using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System;
@@ -22,7 +23,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Collections.Specialized.BitVector32;
 
- 
+using System.Data.OleDb;
+
 
 namespace ReportUT_
 {
@@ -296,6 +298,16 @@ namespace ReportUT_
      
         private void Button_Reports_Click(object sender, EventArgs e)
         {
+            //RegistryKey reg = Microsoft.Win32.Registry
+            //                .LocalMachine
+            //                .OpenSubKey("Software\\ODBC\\ODBC.INI\\ODBC Data Sources\\");
+            //foreach (string name in reg.GetValueNames())
+            //{
+            //    Console.WriteLine(name + " : " + reg.GetValue(name)); // name and driver description 
+            //}
+            //reg.Close();
+            //return;
+
             folderBrowserDialog1.Description = "Выбор местоположения для жуналов учета";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
@@ -624,6 +636,18 @@ if (k==0)                   return;
 
         private void Button_Settings_Click(object sender, EventArgs e)
         {
+            OleDbDataReader reader =
+      OleDbEnumerator.GetEnumerator(Type.GetTypeFromProgID("MSDASQL Enumerator"));
+
+            while (reader.Read())
+            {
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    if (reader.GetName(i) == "SOURCES_NAME")
+                    Console.WriteLine("{0} ",  reader.GetValue(i));
+                }
+            }
+
             panel2.Visible = !panel2.Visible;
         }
 
