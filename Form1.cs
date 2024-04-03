@@ -48,7 +48,7 @@ namespace ReportUT_
         public void ShowMyDialogBox_E(string S, String  LS)
                    // public void ShowMyDialogBox_E(string S, List<String> LS)
         {
-            MsgBoxExampleForm testDialog = new MsgBoxExampleForm(S,LS );
+            MsgBoxExampleForm testDialog = new MsgBoxExampleForm(S,LS , text_Report.Text);
 
             //testDialog.Text = "Результат";
             if (testDialog.ShowDialog(this) == DialogResult.OK)
@@ -65,10 +65,11 @@ namespace ReportUT_
 
         //string SS = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments);
         string Path_ini = Environment.GetFolderPath(Environment.SpecialFolder.CommonDocuments) +
-            "\\UniTesS\\AmbientUDPService.dat";
+            "\\UniTesS\\AmbientUIDService.dat";
 
 
         private Params pl = new Params();
+
         private OdbcConnector p_odbcConnector;
 
         private ReportDAYs RepDAYs = new ReportDAYs();
@@ -730,7 +731,7 @@ if (k==0)                   return;
                  
                 if (bError)
                 {
-                    MessageBox.Show("Error reading AmbientUDPService.dat");
+                    MessageBox.Show("Error reading AmbientUIDService.dat");
                     stmSaveRead.Close();
                     return;
                 }

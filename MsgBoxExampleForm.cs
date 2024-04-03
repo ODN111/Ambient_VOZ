@@ -13,7 +13,7 @@ namespace ReportUT_
     public partial class MsgBoxExampleForm : Form
     {
          
-        public MsgBoxExampleForm(string S,  String LS)
+        public MsgBoxExampleForm(string S,  string LS, string Path )
         {
             InitializeComponent();
             this.ControlBox = false; ;
@@ -21,6 +21,7 @@ namespace ReportUT_
             listBox1.Items.Clear();
             string[] words = LS.Split('\n');
             listBox1.Items.AddRange(words.ToArray());
+            saveFileDialog1.InitialDirectory = Path;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,6 +31,8 @@ namespace ReportUT_
 
         private void button2_Click(object sender, EventArgs e)
         {
+            ///Path.
+           
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
