@@ -33,6 +33,8 @@ namespace ReportUT_
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             // получаем выбранный файл
+            try
+            {
             string filename = saveFileDialog1.FileName;
             // сохраняем текст в файл
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(filename);
@@ -42,6 +44,13 @@ namespace ReportUT_
             }
             SaveFile.Close();
             MessageBox.Show("Файл сохранен");
+            this.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                this.Close();
+            }
         }
     }
 }

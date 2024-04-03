@@ -36,7 +36,7 @@ namespace ReportUT_
         }
         #endregion
 
-        private string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_Log.txt";
+        private string logPath = "C:\\Users\\Public\\Documents\\UniTesS\\UT_Report_UID_Log.txt";
         private long maximumSize = 104857;
 
         private Logger()
@@ -133,6 +133,7 @@ namespace ReportUT_
 
         }
 
+  
         public String GetTextBetween(string text, string findText1, string findText2)
         {
 
@@ -419,7 +420,7 @@ namespace ReportUT_
                 command.CommandTimeout = 0;
                 //    select LOG_TIME, LOG_TEXT from S_AMBIENT_LOG  where LOG_TIME >= '04.12.2023' and    LOG_TIME <= '04.02.2024'
                 command.CommandText = SELECT_UID_SENSORS +"'" + Time1 + "'" + " and LOG_TIME <=" + "'" + Time2 + "'" + "   order by  LOG_TIME"; ;
-                System.Threading.Thread.Sleep(3000);
+                System.Threading.Thread.Sleep(1000);
 
                 try
                 {

@@ -107,12 +107,12 @@ namespace ReportUT_
 
             dateTimePicker_Start_Time.MaxDate =   DateTime.Now;
             dateTimePicker_Start_Time.ShowUpDown = true;
-            dateTimePicker_Start_Time.CustomFormat = "yyyy MMMM";
+          //  dateTimePicker_Start_Time.CustomFormat = "yyyy MMMM";
            // dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month-2, 1, dt.Hour, dt.Minute, dt.Second);
 
             dateTimePicker_Stop_Time.MaxDate = DateTime.Now  ;
             dateTimePicker_Stop_Time.ShowUpDown = true;
-            dateTimePicker_Stop_Time.CustomFormat = "yyyy MMMM";
+           // dateTimePicker_Stop_Time.CustomFormat = "yyyy MMMM";
          
 
            ToolTip t = new ToolTip();
@@ -151,19 +151,41 @@ namespace ReportUT_
 
         }
 
+       
+
         public  String Get_UID_NAME_Sensor_by_UID(String UID)
         {
 
-             String SL =  "";
+             String SL =  "" , StrCur ="", Str_Rez = "";
+           List <Sensor_UID_NAME> List_Sensor_UID_NAME_R = new List<Sensor_UID_NAME>(); 
+            List_Sensor_UID_NAME_R.Clear();
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                 if (List_Sensor_UID_NAME[i].UID.Contains(UID))
                 {
                     List_Sensor_UID_NAME[i].Name = List_Sensor_UID_NAME[i].Name.Replace(",", String.Empty);
-                    SL = SL+(List_Sensor_UID_NAME[i].Time +"   " + List_Sensor_UID_NAME[i].Name + "\n" );
+                    List_Sensor_UID_NAME_R.Add(List_Sensor_UID_NAME[i]);
+                    // SL = SL+(List_Sensor_UID_NAME[i].Time +"   " + List_Sensor_UID_NAME[i].Name + "\n" );
                 }
-                    
 
-           return SL;
+            int ii = 0;
+            while (ii< List_Sensor_UID_NAME_R.Count-1)
+            {
+                StrCur = List_Sensor_UID_NAME_R[ii].Name;
+                if (List_Sensor_UID_NAME_R[ii + 1].Name.Contains(StrCur))
+                {
+                    ii++;
+
+                }
+                else
+                {
+                    SL = SL + (List_Sensor_UID_NAME_R[ii].Time + "   " + List_Sensor_UID_NAME_R[ii].Name + "\n");
+                    ii++;
+                }
+
+            }
+
+
+            return SL;
         }
 
 
@@ -834,12 +856,8 @@ if (k==0)                   return;
 
             try
             {
-               // materialButton2_Click(sender,e);
-
                 if (onProgress != null) onProgress(10);
                 Application.DoEvents();
-
-               // materialButton2_Click(sender, e);
 
                 if (radioButton1.Checked)
                 {
@@ -858,7 +876,7 @@ if (k==0)                   return;
 
                     string Name = Name_comboBox.Text;
                     if (Name == "") return;
-                    Action action = () => ShowMyDialogBox_E("Name:  " + Name, Get_UID_NAME_Sensor_by_UID(Name).ToString());
+                    Action action = () => ShowMyDialogBox_E("Name:  " + Name, Get_UID_NAME_Sensor_by_NAME(Name).ToString());
                     if (InvokeRequired) Invoke(action); else action();
                     // MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
                 }
@@ -915,7 +933,7 @@ if (k==0)                   return;
 
 
                 dt = dateTimePicker_Stop_Time.Value;
-                dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
+              //  dateTimePicker_Stop_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
                 dt = dateTimePicker_Start_Time.Value;
                 dateTimePicker_Start_Time.Value = new DateTime(dt.Year, dt.Month, 1, dt.Hour, dt.Minute, dt.Second);
 
