@@ -1,4 +1,4 @@
-﻿ 
+﻿
 
 using IniParser;
 using IniParser.Model;
@@ -48,7 +48,7 @@ namespace ReportUT_
         }
 
 
-        public void ShowMyDialogBox_E(string S, String  LS)
+         public void ShowMyDialogBox_E(string S, String  LS)
                    // public void ShowMyDialogBox_E(string S, List<String> LS)
         {
             MsgBoxExampleForm testDialog = new MsgBoxExampleForm(S,LS , text_Report.Text);
@@ -330,17 +330,7 @@ namespace ReportUT_
      
         private void Button_Reports_Click(object sender, EventArgs e)
         {
-            //RegistryKey reg = Microsoft.Win32.Registry
-            //                .LocalMachine
-            //                .OpenSubKey("Software\\ODBC\\ODBC.INI\\ODBC Data Sources\\");
-            //foreach (string name in reg.GetValueNames())
-            //{
-            //    Console.WriteLine(name + " : " + reg.GetValue(name)); // name and driver description 
-            //}
-            //reg.Close();
-            //return;
-
-            folderBrowserDialog1.Description = "Выбор местоположения для жуналов учета";
+           folderBrowserDialog1.Description = "Выбор местоположения для жуналов учета";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             else
@@ -737,7 +727,11 @@ if (k==0)                   return;
 
             try
             {
-           // materialButton2_Click(sender,e);
+                List<string> SL = EnumDsn();
+
+                comboBox1.Items.AddRange(SL.ToArray());
+
+                comboBox1.SelectedItem = SL[0];
             }
             catch (System.Exception ex)
             {
@@ -1066,7 +1060,37 @@ if (k==0)                   return;
             radioButton2.Checked = true;
         }
 
-       
+
+        private List<string> EnumDsn()
+        {
+            List<string> list = new List<string>();
+             list.AddRange(EnumDsn(Registry.CurrentUser));
+            list.AddRange(EnumDsn(Registry.LocalMachine));
+            return list;
+        }
+
+        private IEnumerable<string> EnumDsn(RegistryKey rootKey)
+        {
+            RegistryKey regKey = rootKey.OpenSubKey(@"Software\ODBC\ODBC.INI\ODBC Data Sources");
+            if (regKey != null)
+            {
+                foreach (string name in regKey.GetValueNames())
+                {
+                    string value = regKey.GetValue(name, "").ToString();
+                    yield return name;
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           //SelectedIndex.ToString();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            text_DSN.Text = comboBox1.SelectedItem.ToString();
+        }
     }
 
 

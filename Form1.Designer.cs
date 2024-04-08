@@ -66,6 +66,8 @@ namespace ReportUT_
             this.Button_Settings = new MaterialSkin.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label_Count = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -205,6 +207,8 @@ namespace ReportUT_
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.comboBox1);
             this.panel2.Controls.Add(this.Button_Reports);
             this.panel2.Controls.Add(this.text_DSN);
             this.panel2.Controls.Add(this.text_Report);
@@ -246,7 +250,7 @@ namespace ReportUT_
             this.text_DSN.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.text_DSN.Location = new System.Drawing.Point(234, 5);
             this.text_DSN.Name = "text_DSN";
-            this.text_DSN.Size = new System.Drawing.Size(465, 26);
+            this.text_DSN.Size = new System.Drawing.Size(208, 26);
             this.text_DSN.TabIndex = 7;
             // 
             // text_Report
@@ -434,6 +438,26 @@ namespace ReportUT_
             this.label_Count.Text = "Всего / Обработано";
             this.label_Count.Visible = false;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(533, 6);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(213, 24);
+            this.comboBox1.TabIndex = 10;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // button1
+            // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Location = new System.Drawing.Point(449, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "<----------";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -499,6 +523,8 @@ namespace ReportUT_
         private System.Windows.Forms.Label label1;
         private MaterialSkin.Controls.MaterialButton materialButton2;
         private System.Windows.Forms.Label label_Count;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
