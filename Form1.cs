@@ -1,30 +1,18 @@
-﻿
-
-using IniParser;
-using IniParser.Model;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using OfficeOpenXml;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 using System.Windows.Forms;
-using static System.Collections.Specialized.BitVector32;
 
 using System.Data.OleDb;
-using System.Security.Policy;
 
 
 namespace ReportUT_
@@ -950,7 +938,9 @@ if (k==0)                   return;
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (p_odbcConnector!=null)
-            p_odbcConnector.CloseConnection();
+            {
+                p_odbcConnector.CloseConnection();
+            }
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -958,7 +948,7 @@ if (k==0)                   return;
 
         }
 
-        private void materialButton2_Click(object sender, EventArgs e)
+        private void MaterialButton2_Click(object sender, EventArgs e)
         {
              
             try
@@ -974,7 +964,8 @@ if (k==0)                   return;
                     return;
                 }
 
-                p_odbcConnector = new OdbcConnector(pl.DSN);
+                //p_odbcConnector = new OdbcConnector(pl.DSN);
+                p_odbcConnector = new OdbcConnector(text_DSN.Text);
                 p_odbcConnector.F_DB = true;
 
                 if (onProgress != null) onProgress(30);
