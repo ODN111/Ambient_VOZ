@@ -24,6 +24,7 @@ using System.Windows.Forms;
 using static System.Collections.Specialized.BitVector32;
 
 using System.Data.OleDb;
+using System.Security.Policy;
 
 
 namespace ReportUT_
@@ -142,14 +143,39 @@ namespace ReportUT_
 
         public  String Get_UID_NAME_Sensor_by_NAME(String Name)
         {
-            String SL = "";
+            String SL = "", StrCur = "";
+            List<Sensor_UID_NAME> List_Sensor_UID_NAME_R = new List<Sensor_UID_NAME>();
+            List_Sensor_UID_NAME_R.Clear();
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
                 if (List_Sensor_UID_NAME[i].Name.Contains(Name))
                 {
                     List_Sensor_UID_NAME[i].UID = List_Sensor_UID_NAME[i].UID.Replace(",", String.Empty);
-                    SL = SL+(List_Sensor_UID_NAME[i].Time + "   " + List_Sensor_UID_NAME[i].UID + "\n");
+                    List_Sensor_UID_NAME_R.Add(List_Sensor_UID_NAME[i]);
+                    // SL = SL+(List_Sensor_UID_NAME[i].Time +"   " + List_Sensor_UID_NAME[i].UID + "\n" );
                 }
-                    
+
+            int ii = 0;
+            bool ONE = true;
+            int CNT = List_Sensor_UID_NAME_R.Count();
+            while (ii < List_Sensor_UID_NAME_R.Count - 1)
+            {
+                StrCur = List_Sensor_UID_NAME_R[ii].UID;
+                if (List_Sensor_UID_NAME_R[ii + 1].UID.Contains(StrCur))
+                {
+                    ii++;
+                }
+                else
+                {
+                    ONE = false;
+                    SL = SL + (List_Sensor_UID_NAME_R[ii].Time + "   " + List_Sensor_UID_NAME_R[ii].UID + "\n");
+                    ii++;
+                }
+               
+            }
+ if (ONE) SL = SL + (List_Sensor_UID_NAME_R[0].Time + "   " + List_Sensor_UID_NAME_R[0].UID + "\n");
+            if (CNT >= 2)
+                if (List_Sensor_UID_NAME_R[CNT - 2].UID != List_Sensor_UID_NAME_R[CNT - 1].UID)
+                SL = SL + (List_Sensor_UID_NAME_R[CNT - 1].Time + "   " + List_Sensor_UID_NAME_R[CNT - 1].UID + "\n");
             return SL;
 
         }
@@ -159,7 +185,7 @@ namespace ReportUT_
         public  String Get_UID_NAME_Sensor_by_UID(String UID)
         {
 
-             String SL =  "" , StrCur ="", Str_Rez = "";
+             String SL =  "" , StrCur ="" ;
            List <Sensor_UID_NAME> List_Sensor_UID_NAME_R = new List<Sensor_UID_NAME>(); 
             List_Sensor_UID_NAME_R.Clear();
             for (int i = 0; i < List_Sensor_UID_NAME.Count; i++)
@@ -171,22 +197,28 @@ namespace ReportUT_
                 }
 
             int ii = 0;
+            bool ONE = true;
+            int CNT = List_Sensor_UID_NAME_R.Count();
             while (ii< List_Sensor_UID_NAME_R.Count-1)
             {
                 StrCur = List_Sensor_UID_NAME_R[ii].Name;
                 if (List_Sensor_UID_NAME_R[ii + 1].Name.Contains(StrCur))
                 {
                     ii++;
-
                 }
                 else
                 {
+                    ONE = false;
                     SL = SL + (List_Sensor_UID_NAME_R[ii].Time + "   " + List_Sensor_UID_NAME_R[ii].Name + "\n");
                     ii++;
                 }
 
             }
 
+            if (ONE) SL = SL + (List_Sensor_UID_NAME_R[0].Time + "   " + List_Sensor_UID_NAME_R[0].Name + "\n");
+           if (CNT>=2)
+            if (List_Sensor_UID_NAME_R[CNT - 2].Name != List_Sensor_UID_NAME_R[CNT - 1].Name)
+                SL = SL + (List_Sensor_UID_NAME_R[CNT - 1].Time + "   " + List_Sensor_UID_NAME_R[CNT - 1].Name + "\n");
 
             return SL;
         }
@@ -604,7 +636,8 @@ if (k==0)                   return;
 
            String Sg = RepDAYs.dateT1.ToString();
 
-            string path = text_Report.Text; //+ @"{text_Report.Text}\\Отчеты\\{RepDAYs.dateT1.Year}\\{self.month_str}";
+           string path =  text_Report.Text; //+ @"{text_Report.Text}\\Отчеты\\{RepDAYs.dateT1.Year}\\{self.month_str}";
+
             path = path + "\\Отчеты\\" + RepDAYs.dateT1.Year.ToString() + "\\"
                 + RepDAYs.dateT1.ToString ("MMMM") ;
             // + RepDAYs.dateT1.Month.ToString();
@@ -879,7 +912,7 @@ if (k==0)                   return;
 
             try
             {
-                if (onProgress != null) onProgress(10);
+                //if (onProgress != null) onProgress(10);
                 Application.DoEvents();
 
                 if (radioButton1.Checked)
@@ -899,7 +932,7 @@ if (k==0)                   return;
 
                     string Name = Name_comboBox.Text;
                     if (Name == "") return;
-                    Action action = () => ShowMyDialogBox_E("Name:  " + Name, Get_UID_NAME_Sensor_by_NAME(Name).ToString());
+                    Action action = () => ShowMyDialogBox_E("Имя:  " + Name, Get_UID_NAME_Sensor_by_NAME(Name).ToString());
                     if (InvokeRequired) Invoke(action); else action();
                     // MessageBox.Show("                     UIDs   \n\n" + Get_UID_NAME_Sensor_by_NAME(Name), "Name:  "+ Name);
                 }
@@ -915,6 +948,7 @@ if (k==0)                   return;
             {
                 Logger.GetInstanse().SetData("Get_UID_NAME_Sensor", ex.Message);
                 MessageBox.Show(ex.Message);
+                if (onProgress != null) onProgress(0);
                 return;
             }
         }
@@ -932,7 +966,7 @@ if (k==0)                   return;
 
         private void materialButton2_Click(object sender, EventArgs e)
         {
-
+             
             try
             {
 
@@ -942,6 +976,7 @@ if (k==0)                   return;
        "\nне может превышать его окончание  " + dateTimePicker_Stop_Time.Value.ToString() +
        "\n(начальная дата должна быть  меньше конечной)  ", "Ошибка");
                     // dateTimePicker_Stop_Time.Value = DateTime.Now;
+                    materialButton1.Visible = false;
                     return;
                 }
 
@@ -998,14 +1033,15 @@ if (k==0)                   return;
                 {
                     MessageBox.Show("                      НЕТ ДАННЫХ \n\n"+"начало периода  " + dateTimePicker_Start_Time.Value.ToString() +
        "\nокончание периода " + dateTimePicker_Stop_Time.Value.ToString(), "                       Сообщение");
+                    materialButton1.Visible = false;
                     return;
                 }
 
-
+                materialButton1.Visible = true;
+                materialButton1.Enabled = true;
                 //// Excel_Add(List_Sensor_UID_NAME);
 
-
-                if (onProgress != null) onProgress(1);
+                if (onProgress != null) onProgress(0);
                 Application.DoEvents();
 
             }
@@ -1013,6 +1049,7 @@ if (k==0)                   return;
             {
                 Logger.GetInstanse().SetData("Get_UID_NAME_Sensor", ex.Message);
                 MessageBox.Show(ex.Message);
+                materialButton1.Visible = false;
                 return;
             }
 

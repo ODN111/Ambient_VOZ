@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace ReportUT_
         public MsgBoxExampleForm(string S,  string LS, string Path )
         {
             InitializeComponent();
-            this.ControlBox = false; ;
+           // this.ControlBox = false; ;
             label1.Text = S;
             listBox1.Items.Clear();
             string[] words = LS.Split('\n');
@@ -41,13 +42,20 @@ namespace ReportUT_
             string filename = saveFileDialog1.FileName;
             // сохраняем текст в файл
             System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(filename);
-            foreach (var item in listBox1.Items)
+                SaveFile.WriteLine(label1.Text + "\n");
+                if (label1.Text.Contains ("UID") )
+                    SaveFile.WriteLine("История имен" + "\n");
+                else SaveFile.WriteLine("История UID(S/N)" + "\n");
+                foreach (var item in listBox1.Items)
             {
                 SaveFile.WriteLine(item.ToString());
             }
             SaveFile.Close();
             MessageBox.Show("Файл сохранен");
             this.Close();
+                
+                Process.Start(@"notepad.exe", filename);
+                 
             }
             catch(Exception ex)
             {
