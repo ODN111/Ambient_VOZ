@@ -21,7 +21,12 @@ namespace ReportUT_
             label1.Text = S;
             listBox1.Items.Clear();
             string[] words = LS.Split('\n');
-            listBox1.Items.AddRange(words.ToArray());
+               words.Count();
+            for ( int i = 0;i< words.Length-1;i++ )
+            {
+                listBox1.Items.Add(words[i]);
+            }
+            ;
             saveFileDialog1.InitialDirectory = Path;
         }
 

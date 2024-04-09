@@ -114,11 +114,30 @@ namespace ReportUT_
 
 
         public void Check_UID_in_Mes(String S)
-        {
-
+        {//Изменена конфигурация THB. UID: 364C0F1D, Имя: 170430, Период измерения: 10, Период отправки: 10, T min: 15.0, T max: 20.0, H min: 30.0, H max: 40.0
+            // Изменена конфигурация Alert THB. UID: 364C0F1D, Имя: 170430. T Alert min: 16, T Alert max: 24, H Alert min: 31, H Alert max: 59, p Alert min: , p Alert max:
+            // Изменена конфигурация THB. UID: 36510F38, Имя: 1ХОЛ Г, Период измерения: 10, Период отправки: 10, T min: 8.0, T max: 15.0, H min: 2.0, H max: 90.0
             if (S != null)
             {
-                Mes_LOg = GetTextBetween(S, "UID:", "Перио");
+                if (Mes_LOg.Contains(". T Alert min:"))
+                {
+
+                    Mes_LOg = GetTextBetween(S, "UID:", ". T Alert min:");
+                    // T Alert min
+                    string[] splitArray1 = new string[1] { "Имя:" };//Add the two strings to an array to split across each string in the array
+                    string[] substrings1 = Mes_LOg.Split(splitArray1, StringSplitOptions.None);//Get the substring
+                    {
+                        if (substrings1[0] != null)
+                        {
+                            UID = substrings1[0].Trim();
+                            Name = substrings1[1].Trim();
+                            return;
+                        }
+
+                    }
+                }
+                Mes_LOg = GetTextBetween(S, "UID:", ", Период ");
+                //  
                 string[] splitArray = new string[1] { "Имя:" };//Add the two strings to an array to split across each string in the array
                 string[] substrings = Mes_LOg.Split(splitArray, StringSplitOptions.None);//Get the substring
                 {
