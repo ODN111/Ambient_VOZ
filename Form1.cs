@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using OfficeOpenXml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -215,32 +214,32 @@ namespace ReportUT_
         private void Excel_Add(List<Sensor_UID_NAME> List_Sensor_UID_NAME)
         {
 
-            try
-            {
-                string file = "C:\\Users\\Public\\Documents\\UniTesS\\Report_UID_NANE.xls";
-                var package = new ExcelPackage();
-                var sheet = package.Workbook.Worksheets.Add("Report");
+            //try
+            //{
+            //    string file = "C:\\Users\\Public\\Documents\\UniTesS\\Report_UID_NANE.xls";
+            //    var package = new ExcelPackage();
+            //    var sheet = package.Workbook.Worksheets.Add("Report");
 
-                for (int i = 0;i< List_Sensor_UID_NAME.Count;i++)
-                {
-                    sheet.Cells[i+1, 1].Value = List_Sensor_UID_NAME[i].Time;
-                    sheet.Cells[i+1, 2].Value = List_Sensor_UID_NAME[i].UID;
-                    sheet.Cells[i+1, 3].Value = List_Sensor_UID_NAME[i].Name;
-                }
+            //    for (int i = 0;i< List_Sensor_UID_NAME.Count;i++)
+            //    {
+            //        sheet.Cells[i+1, 1].Value = List_Sensor_UID_NAME[i].Time;
+            //        sheet.Cells[i+1, 2].Value = List_Sensor_UID_NAME[i].UID;
+            //        sheet.Cells[i+1, 3].Value = List_Sensor_UID_NAME[i].Name;
+            //    }
                
 
-                //sheet.Cells["B2"].Value = "Company:";
-               // sheet.Cells[2, 3].Value = "sasdf";
+            //    //sheet.Cells["B2"].Value = "Company:";
+            //   // sheet.Cells[2, 3].Value = "sasdf";
 
 
-                File.WriteAllBytes(file, package.GetAsByteArray());  //.Save(file);
-            }
-            catch (System.Exception ex)
-            {
-                Logger.GetInstanse().SetData("Excel_Add", ex.Message);
-                MessageBox.Show(ex.Message);
-                return;
-            }
+            //    File.WriteAllBytes(file, package.GetAsByteArray());  //.Save(file);
+            //}
+            //catch (System.Exception ex)
+            //{
+            //    Logger.GetInstanse().SetData("Excel_Add", ex.Message);
+            //    MessageBox.Show(ex.Message);
+            //    return;
+            //}
         }
 
 
@@ -960,7 +959,7 @@ if (k==0)                   return;
        "\nне может превышать его окончание  " + dateTimePicker_Stop_Time.Value.ToString() +
        "\n(начальная дата должна быть  меньше конечной)  ", "Ошибка");
                     // dateTimePicker_Stop_Time.Value = DateTime.Now;
-                    materialButton1.Visible = false;
+                    materialButton1.Enabled = false;
                     return;
                 }
 
@@ -1018,12 +1017,10 @@ if (k==0)                   return;
                 {
                     MessageBox.Show("                      НЕТ ДАННЫХ \n\n"+"начало периода  " + dateTimePicker_Start_Time.Value.ToString() +
        "\nокончание периода " + dateTimePicker_Stop_Time.Value.ToString(), "                       Сообщение");
-                    materialButton1.Visible = false;
+                    materialButton1.Enabled = false;
                     return;
                 }
-
-                materialButton1.Visible = true;
-                materialButton1.Enabled = true;
+                  materialButton1.Enabled = true;
                 //// Excel_Add(List_Sensor_UID_NAME);
 
                 if (onProgress != null) onProgress(0);
@@ -1034,7 +1031,7 @@ if (k==0)                   return;
             {
                 Logger.GetInstanse().SetData("Get_UID_NAME_Sensor", ex.Message);
                 MessageBox.Show(ex.Message);
-                materialButton1.Visible = false;
+                materialButton1.Enabled = false;
                 return;
             }
 

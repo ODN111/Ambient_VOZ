@@ -412,7 +412,7 @@ namespace ReportUT_
             this.Button_Settings.Depth = 0;
             this.Button_Settings.HighEmphasis = true;
             this.Button_Settings.Icon = ((System.Drawing.Image)(resources.GetObject("Button_Settings.Icon")));
-            this.Button_Settings.Location = new System.Drawing.Point(149, 6);
+            this.Button_Settings.Location = new System.Drawing.Point(149, 8);
             this.Button_Settings.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.Button_Settings.MouseState = MaterialSkin.MouseState.HOVER;
             this.Button_Settings.Name = "Button_Settings";
